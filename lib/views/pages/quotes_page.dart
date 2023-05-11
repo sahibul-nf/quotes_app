@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:quotes_app/views/pages/quote_detail_page.dart';
 import 'package:quotes_app/views/themes/typography.dart';
 import 'package:quotes_app/views/widgets/icon_solid_light.dart';
 import 'package:quotes_app/views/widgets/quotes_card.dart';
@@ -52,12 +53,27 @@ class QuotesPage extends ConsumerWidget {
                     bottom: 16,
                     top: index == 0 ? 100 : 0,
                   ),
-                  child: const QuotesCard(
-                    author: "Walt Disney",
-                    authorAvatar: "assets/img_avatar.png",
-                    authorJob: "Co-Founder of The Walt Disney Company",
-                    content:
-                        "The best way to get started is to quit talking and begin doing.",
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const QuoteDetailPage(
+                            content:
+                                "The best way to get started is to quit talking and begin doing. The best way to get started is to quit talking and begin doing. The best way to get started is to quit talking and begin doing.",
+                            author: "Walt Disney",
+                            authorAvatar: "assets/img_avatar.png",
+                            authorJob: "Co-Founder of The Walt Disney Company",
+                          ),
+                        ),
+                      );
+                    },
+                    child: const QuotesCard(
+                      author: "Walt Disney",
+                      authorAvatar: "assets/img_avatar.png",
+                      authorJob: "Co-Founder of The Walt Disney Company",
+                      content:
+                          "The best way to get started is to quit talking and begin doing.",
+                    ),
                   ),
                 );
               },

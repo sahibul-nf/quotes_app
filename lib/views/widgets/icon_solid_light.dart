@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:quotes_app/views/themes/colors.dart';
 
 class IconSolidLight extends StatelessWidget {
-  const IconSolidLight({super.key, required this.icon});
+  const IconSolidLight({super.key, required this.icon, this.onPressed});
   final IconData icon;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,6 @@ class IconSolidLight extends StatelessWidget {
       highlightElevation: 0,
       hoverElevation: 0,
       disabledElevation: 0,
-      splashColor: MyColors.secondary,
       focusColor: MyColors.secondary,
       hoverColor: MyColors.secondary,
       backgroundColor: MyColors.secondary,
