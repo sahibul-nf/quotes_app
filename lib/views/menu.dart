@@ -1,5 +1,6 @@
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:quotes_app/views/pages/quotes_page.dart';
 import 'package:quotes_app/views/themes/colors.dart';
 
 enum _SelectedTab { quotes, create, favorite, profile }
@@ -26,9 +27,7 @@ class _MenuState extends State<Menu> {
       body: IndexedStack(
         index: _SelectedTab.values.indexOf(_selectedTab),
         children: [
-          Container(
-            color: MyColors.primary,
-          ),
+          const QuotesPage(),
           Container(
             color: MyColors.secondary,
           ),
