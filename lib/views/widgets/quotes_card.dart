@@ -70,9 +70,7 @@ class QuotesCard extends StatelessWidget {
                   ),
                 ),
                 // const Spacer(),
-                const Expanded(
-                  child: SizedBox(height: 20),
-                ),
+                const Expanded(child: SizedBox(height: 20)),
                 Row(
                   children: [
                     CircleAvatar(
