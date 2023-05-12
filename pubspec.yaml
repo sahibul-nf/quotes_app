@@ -36,6 +36,7 @@ dependencies:
   flutter_dotenv: ^5.0.2
   flutter_riverpod: ^2.3.6
   google_fonts: ^4.0.4
+  http: ^0.13.6
   phosphor_flutter: ^2.0.0
   supabase_flutter: ^1.8.1
 
