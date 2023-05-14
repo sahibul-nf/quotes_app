@@ -9,7 +9,7 @@ class IconSolidLight extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.small(
-      onPressed: () {},
+      onPressed: onPressed,
       elevation: 0,
       focusElevation: 0,
       highlightElevation: 0,

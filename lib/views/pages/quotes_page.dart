@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:quotes_app/controllers/quotes_controller.dart';
 import 'package:quotes_app/views/pages/quote_detail_page.dart';
+import 'package:quotes_app/views/pages/search_page.dart';
 import 'package:quotes_app/views/themes/colors.dart';
 import 'package:quotes_app/views/themes/typography.dart';
 import 'package:quotes_app/views/widgets/icon_solid_light.dart';
@@ -25,6 +26,13 @@ class QuotesPage extends ConsumerWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: IconSolidLight(
                   icon: PhosphorIcons.regular.magnifyingGlass,
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const SearchPage(),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
