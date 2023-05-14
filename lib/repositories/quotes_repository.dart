@@ -5,12 +5,11 @@ import 'package:http/http.dart' as http;
 import 'package:quotes_app/models/quotable_model.dart';
 import 'package:quotes_app/utils/api_path.dart';
 
-abstract class QuotesRepository {
-  Future<List<Quotable>> getQuotes();
-}
+final quotesRepositoryProvider =
+    Provider<QuotesRepository>((ref) => QuotesRepository());
 
-class QuotesRepositoryImpl implements QuotesRepository {
-  @override
+class QuotesRepository {
+  
   Future<List<Quotable>> getQuotes() async {
     final response =
         await http.get(Uri.parse('$baseUrl$quotesPath$randomPath?limit=20'));
@@ -25,6 +24,3 @@ class QuotesRepositoryImpl implements QuotesRepository {
     }
   }
 }
-
-final quotesRepositoryProvider =
-    Provider<QuotesRepository>((ref) => QuotesRepositoryImpl());
