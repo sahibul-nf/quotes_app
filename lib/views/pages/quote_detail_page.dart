@@ -64,6 +64,7 @@ class QuoteDetailPage extends ConsumerWidget {
                 style: MyTypography.body1.copyWith(
                   color: Colors.white,
                   fontSize: 24,
+                  fontWeight: FontWeight.w600,
                   height: 1.3,
                 ),
               ),

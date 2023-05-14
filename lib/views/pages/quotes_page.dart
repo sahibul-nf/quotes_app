@@ -65,7 +65,7 @@ class QuotesPage extends ConsumerWidget {
                               builder: (context) => QuoteDetailPage(
                                 content: quotes[index].content!,
                                 // "The best way to get started is to quit talking and begin doing. The best way to get started is to quit talking and begin doing. The best way to get started is to quit talking and begin doing.",
-                                author: "Walt Disney",
+                                author: quotes[index].author!,
                                 authorAvatar: "assets/img_avatar.png",
                                 authorJob:
                                     "Co-Founder of The Walt Disney Company",
