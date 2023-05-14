@@ -55,22 +55,25 @@ class QuotesCard extends StatelessWidget {
                   size: 65,
                   color: Colors.white,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: AutoSizeText(
-                    content,
-                    textAlign: textAlign ?? TextAlign.start,
-                    maxLines: 4,
-                    maxFontSize: 28,
-                    style: MyTypography.h2.copyWith(
-                      fontSize: 28,
-                      color: Colors.white,
-                      height: 1.4,
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: AutoSizeText(
+                      content,
+                      textAlign: textAlign ?? TextAlign.start,
+                      maxLines: 5,
+                      maxFontSize: 28,
+                      minFontSize: 20,
+                      overflow: TextOverflow.ellipsis,
+                      style: MyTypography.h2.copyWith(
+                        fontSize: 28,
+                        color: Colors.white,
+                        height: 1.4,
+                      ),
                     ),
                   ),
                 ),
-                // const Spacer(),
-                const Expanded(child: SizedBox(height: 20)),
+                const SizedBox(height: 20),
                 Row(
                   children: [
                     CircleAvatar(
