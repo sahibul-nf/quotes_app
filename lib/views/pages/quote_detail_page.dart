@@ -2,9 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:quotes_app/views/themes/typography.dart';
-import 'package:quotes_app/views/widgets/icon_solid_light.dart';
-import 'package:quotes_app/views/widgets/my_leading.dart';
+
+import '../themes/typography.dart';
+import '../widgets/icon_solid_light.dart';
 
 class QuoteDetailPage extends ConsumerWidget {
   const QuoteDetailPage({
@@ -25,7 +25,10 @@ class QuoteDetailPage extends ConsumerWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: const MyLeading(),
+        leading: IconSolidLight(
+          icon: PhosphorIcons.regular.caretLeft,
+          onTap: () => Navigator.pop(context),
+        ),
         title: Text(
           "Quote Detail",
           style: MyTypography.h3,

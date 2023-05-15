@@ -4,6 +4,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:quotes_app/controllers/quotes_controller.dart';
 import 'package:quotes_app/views/pages/quote_detail_page.dart';
 import 'package:quotes_app/views/pages/search_page.dart';
+import 'package:quotes_app/views/pages/signin_page.dart';
 import 'package:quotes_app/views/themes/colors.dart';
 import 'package:quotes_app/views/themes/typography.dart';
 import 'package:quotes_app/views/widgets/icon_solid_light.dart';
@@ -22,19 +23,28 @@ class QuotesPage extends ConsumerWidget {
             centerTitle: false,
             backgroundColor: Colors.white,
             actions: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: IconSolidLight(
-                  icon: PhosphorIcons.regular.magnifyingGlass,
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const SearchPage(),
-                      ),
-                    );
-                  },
-                ),
+              IconSolidLight(
+                icon: PhosphorIcons.regular.magnifyingGlass,
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const SearchPage(),
+                    ),
+                  );
+                },
               ),
+              const SizedBox(width: 8),
+              IconSolidLight(
+                icon: PhosphorIcons.regular.user,
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const SignInPage(),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(width: 20),
             ],
             title: Text("Quotes", style: MyTypography.h2),
             expandedHeight: 116,

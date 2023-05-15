@@ -1,10 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:quotes_app/views/widgets/icon_solid_light.dart';
 
 import '../themes/typography.dart';
-import '../widgets/icon_solid_light.dart';
-import '../widgets/my_leading.dart';
 
 class QuoteDetailPage extends StatelessWidget {
   const QuoteDetailPage({
@@ -25,7 +24,10 @@ class QuoteDetailPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: const MyLeading(),
+        leading: IconSolidLight(
+          icon: PhosphorIcons.regular.caretLeft,
+          onTap: () => Navigator.pop(context),
+        ),
         title: Text(
           "Quote Detail",
           style: MyTypography.h3,
