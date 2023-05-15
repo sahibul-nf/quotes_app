@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:quotes_app/views/pages/signup_page.dart';
-import 'package:quotes_app/views/themes/colors.dart';
+import 'package:quotes_app/views/pages/signin_page.dart';
 
+import '../themes/colors.dart';
 import '../themes/typography.dart';
 import '../widgets/button.dart';
 import '../widgets/icon_solid_light.dart';
 
-class SignInPage extends ConsumerWidget {
-  const SignInPage({super.key});
+class SignUpPage extends ConsumerWidget {
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,7 +23,7 @@ class SignInPage extends ConsumerWidget {
           onTap: () => Navigator.pop(context),
         ),
         title: Text(
-          "Let's Continue",
+          "Get Started",
           style: MyTypography.h3,
         ),
       ),
@@ -47,10 +47,10 @@ class SignInPage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Hello!", style: MyTypography.h1),
+              Text("Welcome!", style: MyTypography.h1),
               const SizedBox(height: 10),
               Text(
-                "Welcome back",
+                "Create an account",
                 style: MyTypography.caption1.copyWith(
                   fontWeight: FontWeight.w400,
                   fontSize: 20,
@@ -113,24 +113,44 @@ class SignInPage extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 5),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        'Forgot password?',
-                        style: MyTypography.body2.copyWith(
-                          color: MyColors.primary,
+                      Checkbox(
+                        value: true,
+                        onChanged: (value) {},
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
                         ),
+                        side: const BorderSide(
+                          color: Colors.grey,
+                          width: 1,
+                        ),
+                        activeColor: MyColors.primary,
                       ),
+                      Text.rich(
+                        TextSpan(
+                          text: "I agree to the ",
+                          children: [
+                            TextSpan(
+                              text: "Terms & Conditions",
+                              style: MyTypography.body2.copyWith(
+                                color: MyColors.primary,
+                              ),
+                            )
+                          ],
+                        ),
+                        style: MyTypography.body2.copyWith(),
+                      )
                     ],
                   ),
                 ],
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 30),
               PrimaryButton(
                 child: Text(
-                  "Sign In",
+                  "Sign Up",
                   style: MyTypography.body1.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
@@ -166,12 +186,12 @@ class SignInPage extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Don't have an account?",
+                    "Already have an account?",
                     style: MyTypography.body2.copyWith(),
                   ),
                   TextButton(
                     child: Text(
-                      "Sign Up",
+                      "Sign In",
                       style: MyTypography.body2.copyWith(
                         color: MyColors.primary,
                       ),
@@ -179,7 +199,7 @@ class SignInPage extends ConsumerWidget {
                     onPressed: () {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) => const SignUpPage(),
+                          builder: (context) => const SignInPage(),
                         ),
                       );
                     },

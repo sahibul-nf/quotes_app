@@ -33,7 +33,7 @@ class QuotesPage extends ConsumerWidget {
                   );
                 },
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 10),
               IconSolidLight(
                 icon: PhosphorIcons.regular.user,
                 onTap: () {
