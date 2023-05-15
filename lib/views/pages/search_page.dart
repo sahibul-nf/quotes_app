@@ -4,7 +4,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:quotes_app/views/themes/colors.dart';
 
 import '../themes/typography.dart';
-import '../widgets/my_leading.dart';
+import '../widgets/icon_solid_light.dart';
 
 class SearchPage extends ConsumerWidget {
   const SearchPage({super.key});
@@ -15,7 +15,10 @@ class SearchPage extends ConsumerWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: const MyLeading(),
+        leading: IconSolidLight(
+          icon: PhosphorIcons.regular.caretLeft,
+          onTap: () => Navigator.pop(context),
+        ),
         title: Text(
           "Search Quote",
           style: MyTypography.h3,

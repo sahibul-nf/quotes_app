@@ -23,7 +23,7 @@ class QuotesPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: IconSolidLight(
                   icon: PhosphorIcons.regular.magnifyingGlass,
-                  onPressed: () {
+                  onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => const SearchPage(),

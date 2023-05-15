@@ -2,25 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:quotes_app/views/themes/colors.dart';
 
 class IconSolidLight extends StatelessWidget {
-  const IconSolidLight({super.key, required this.icon, this.onPressed});
+  const IconSolidLight({super.key, this.onTap, required this.icon});
   final IconData icon;
-  final void Function()? onPressed;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton.small(
-      onPressed: onPressed,
-      elevation: 0,
-      focusElevation: 0,
-      highlightElevation: 0,
-      hoverElevation: 0,
-      disabledElevation: 0,
-      focusColor: MyColors.secondary,
-      hoverColor: MyColors.secondary,
-      backgroundColor: MyColors.secondary,
-      child: Icon(
-        icon,
-        color: MyColors.primaryDark,
+    return InkWell(
+      onTap: onTap,
+      child: UnconstrainedBox(
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(50),
+          child: Container(
+            color: MyColors.secondary,
+            padding: const EdgeInsets.all(10),
+            child: Icon(
+              icon,
+              color: MyColors.primaryDark,
+            ),
+          ),
+        ),
       ),
     );
   }
