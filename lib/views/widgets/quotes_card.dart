@@ -1,8 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:quotes_app/views/themes/colors.dart';
-import 'package:quotes_app/views/themes/typography.dart';
+
+import '../themes/colors.dart';
+import '../themes/typography.dart';
 
 class QuotesCard extends StatelessWidget {
   const QuotesCard({

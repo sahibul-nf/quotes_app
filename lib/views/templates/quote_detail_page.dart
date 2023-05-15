@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:quotes_app/views/widgets/icon_solid_light.dart';
 
 import '../themes/typography.dart';
+import '../widgets/icon_solid_light.dart';
 
 class QuoteDetailPage extends StatelessWidget {
   const QuoteDetailPage({

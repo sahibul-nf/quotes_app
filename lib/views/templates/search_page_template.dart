@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:quotes_app/views/themes/colors.dart';
-import 'package:quotes_app/views/widgets/icon_solid_light.dart';
 
+import '../themes/colors.dart';
 import '../themes/typography.dart';
+import '../widgets/icon_solid_light.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});

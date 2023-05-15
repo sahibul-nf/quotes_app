@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quotes_app/views/themes/colors.dart';
+
+import '../themes/colors.dart';
 
 class IconSolidLight extends StatelessWidget {
   const IconSolidLight({super.key, this.onTap, required this.icon});
