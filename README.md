@@ -1,7 +1,7 @@
 
 # Quotes App
 
-بِسْمِ اللّهِ الرَّحْمَنِ الرَّحِيْ 
+<p align="center">بِسْمِ اللّهِ الرَّحْمَنِ الرَّحِيْ</p> 
 
 Hi, I'm Sahibul, I'm a Flutter Developer 🚀 from Indonesia.
 
@@ -9,11 +9,11 @@ Quotes App is a mobile application that can help you to find the best quotes fro
 
 ## Demo
 
-[![hiQuran Intro](https://cdn.loom.com/sessions/thumbnails/123a128ea2b144fcba499f9424c3e677-1648062504548-with-play.gif)](https://www.loom.com/share/123a128ea2b144fcba499f9424c3e677)
+[![Quotes App](https://cdn.loom.com/sessions/thumbnails/a2b64f2c1b6e4674b763ac57e8d3b208-with-play.gif)](https://www.loom.com/share/a2b64f2c1b6e4674b763ac57e8d3b208)
 
 ## Screenshots
 
-![App Screenshot](https://com-amazon-mas-catalog.s3.amazonaws.com/amzn1.devportal.fileupload.00b97e22ee284b55bde8c63a3e39faf2_7edd61b5-eb5d-4208-90d4-9d279beec00d_b78d802ee3083ad13fbef13d4a29075f)
+![image](https://github.com/sahibul-nf/quotes_app/assets/67043376/4c446747-7550-4673-9503-10c5780bb4a2)
 
 ## Features
 
@@ -40,13 +40,13 @@ Quotes App is a mobile application that can help you to find the best quotes fro
 Clone the project
 
 ```bash
-  git clone https://github.com/sahibul-nf/quran_app
+  git clone https://github.com/sahibul-nf/quotes_app
 ```
 
 Go to the project directory
 
 ```bash
-  cd quran_app
+  cd quotes_app
 ```
 
 Install dependencies
