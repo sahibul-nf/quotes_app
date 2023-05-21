@@ -7,22 +7,16 @@ import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 
 import '../../controllers/quotes_controller.dart';
 import '../../utils/random_colors.dart';
-import '../pages/quote_detail_page.dart';
 import '../themes/colors.dart';
 import '../themes/typography.dart';
 import '../widgets/icon_solid_light.dart';
+import 'quote_detail_page.dart';
 
-class FavoritePage extends ConsumerWidget {
-  const FavoritePage({super.key});
+class QuotesByMePage extends ConsumerWidget {
+  const QuotesByMePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final items = [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "Lorem ipsum dolor sit amet."
-    ];
-
     final quotesState = ref.watch(quotesProvider);
 
     return Scaffold(
@@ -32,12 +26,12 @@ class FavoritePage extends ConsumerWidget {
         toolbarHeight: 66,
         titleSpacing: 20,
         title: Text(
-          "Favorites",
+          "Created by you",
           style: MyTypography.h3,
         ),
         actions: [
           IconSolidLight(
-            icon: PhosphorIcons.regular.trashSimple,
+            icon: PhosphorIcons.regular.plus,
           ),
           const SizedBox(width: 20),
         ],
