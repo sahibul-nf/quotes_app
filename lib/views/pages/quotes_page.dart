@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:quotes_app/controllers/quotes_controller.dart';
+import 'package:quotes_app/utils/random_colors.dart';
 import 'package:quotes_app/views/pages/quote_detail_page.dart';
 import 'package:quotes_app/views/pages/search_page.dart';
 import 'package:quotes_app/views/pages/signin_page.dart';
@@ -16,6 +17,7 @@ class QuotesPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quotesState = ref.watch(quotesProvider);
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -68,7 +70,10 @@ class QuotesPage extends ConsumerWidget {
             delegate: quotesState.when(
               data: (quotes) {
                 return SliverChildBuilderDelegate(
+                  childCount: quotes.length,
                   (context, index) {
+                    final cardColor = getRandomColor();
+
                     return Padding(
                       padding: EdgeInsets.only(
                         right: 16,
@@ -87,11 +92,13 @@ class QuotesPage extends ConsumerWidget {
                                 authorAvatar: "assets/img_avatar.png",
                                 authorJob:
                                     "Co-Founder of The Walt Disney Company",
+                                cardColor: cardColor,
                               ),
                             ),
                           );
                         },
                         child: QuotesCard(
+                          color: cardColor,
                           author: quotes[index].author!,
                           authorAvatar: "assets/img_avatar.png",
                           authorJob: "Co-Founder of The Walt Disney Company",
@@ -101,7 +108,6 @@ class QuotesPage extends ConsumerWidget {
                       ),
                     );
                   },
-                  childCount: 7,
                 );
               },
               loading: () => SliverChildListDelegate.fixed(
