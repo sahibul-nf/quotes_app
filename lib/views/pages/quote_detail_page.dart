@@ -13,11 +13,13 @@ class QuoteDetailPage extends ConsumerWidget {
     required this.author,
     required this.authorAvatar,
     required this.authorJob,
+    this.cardColor,
   });
   final String content;
   final String author;
   final String authorAvatar;
   final String authorJob;
+  final Color? cardColor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,6 +27,7 @@ class QuoteDetailPage extends ConsumerWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
+        leadingWidth: 76,
         leading: IconSolidLight(
           icon: PhosphorIcons.regular.caretLeft,
           onTap: () => Navigator.pop(context),
@@ -46,7 +49,7 @@ class QuoteDetailPage extends ConsumerWidget {
           vertical: 50,
         ),
         decoration: BoxDecoration(
-          color: Colors.blueAccent,
+          color: cardColor,
           borderRadius: BorderRadius.circular(36),
         ),
         child: Column(
@@ -121,6 +124,7 @@ class QuoteDetailPage extends ConsumerWidget {
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.black,
                     backgroundColor: Colors.white,
+                    elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
                     ),

@@ -1,5 +1,6 @@
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:quotes_app/views/pages/favorite_page.dart';
 import 'package:quotes_app/views/pages/quotes_page.dart';
 import 'package:quotes_app/views/themes/colors.dart';
 
@@ -31,9 +32,7 @@ class _MenuState extends State<Menu> {
           Container(
             color: MyColors.secondary,
           ),
-          Container(
-            color: MyColors.primary,
-          ),
+          const FavoritePage(),
           Container(
             color: MyColors.secondary,
           ),

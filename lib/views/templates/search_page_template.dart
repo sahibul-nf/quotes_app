@@ -14,6 +14,7 @@ class SearchPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
+        leadingWidth: 76,
         leading: IconSolidLight(
           icon: PhosphorIcons.regular.caretLeft,
           onTap: () => Navigator.pop(context),
