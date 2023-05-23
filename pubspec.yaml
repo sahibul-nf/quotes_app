@@ -31,14 +31,18 @@ dependencies:
   auto_size_text: ^3.0.0
   cupertino_icons: ^1.0.2
   dot_navigation_bar: ^1.0.1+4
+  dotted_decoration: ^2.0.0
+  fast_color_picker: ^0.1.1
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.0.2
+  flutter_font_picker: ^1.0.0
   flutter_riverpod: ^2.3.6
-  staggered_grid_view_flutter: ^0.0.4
   google_fonts: ^4.0.4
+  group_button: ^5.3.0
   http: ^0.13.6
   phosphor_flutter: ^2.0.0
+  staggered_grid_view_flutter: ^0.0.4
   supabase_flutter: ^1.8.1
 
 dev_dependencies:

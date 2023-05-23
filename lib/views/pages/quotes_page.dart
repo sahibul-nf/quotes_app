@@ -16,7 +16,7 @@ class QuotesPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quotesState = ref.watch(quotesProvider);
+    final quotesState = ref.watch(getQuotesProvider);
 
     return Scaffold(
       body: CustomScrollView(
@@ -122,9 +122,12 @@ class QuotesPage extends ConsumerWidget {
                   ),
                 ],
               ),
-              error: (error, stackTrace) => const SliverChildListDelegate.fixed(
+              error: (error, stackTrace) => SliverChildListDelegate.fixed(
                 [
-                  Text("Something went wrong!"),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                    child: const Center(child: Text("Something went wrong!")),
+                  ),
                 ],
               ),
             ),

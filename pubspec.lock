@@ -81,6 +81,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1+4"
+  dotted_decoration:
+    dependency: "direct main"
+    description:
+      name: dotted_decoration
+      sha256: a5c5771367690b4f64ebfa7911954ab472b9675f025c373f514e32ac4bb81d5e
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -89,6 +97,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+  fast_color_picker:
+    dependency: "direct main"
+    description:
+      name: fast_color_picker
+      sha256: "7fde92f29cf38cb3ee68fbd20b2603d182fbc0a944e3849debd4f78052ce4882"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.1"
   ffi:
     dependency: transitive
     description:
@@ -118,6 +134,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.2"
+  flutter_font_picker:
+    dependency: "direct main"
+    description:
+      name: flutter_font_picker
+      sha256: f6f289be0c77232bd52f173a9e5a61d70517aea0d5117cc911e4b18f23abc0aa
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -168,6 +192,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.6.0"
+  group_button:
+    dependency: "direct main"
+    description:
+      name: group_button
+      sha256: "1382097b97589a66601fbfdf244dc3214e396724ea43899c481fcd40f0d89298"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.3.0"
   hive:
     dependency: transitive
     description:
@@ -384,6 +416,62 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
+  shared_preferences:
+    dependency: transitive
+    description:
+      name: shared_preferences
+      sha256: "16d3fb6b3692ad244a695c0183fca18cf81fd4b821664394a781de42386bf022"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
+  shared_preferences_android:
+    dependency: transitive
+    description:
+      name: shared_preferences_android
+      sha256: "6478c6bbbecfe9aced34c483171e90d7c078f5883558b30ec3163cf18402c749"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.4"
+  shared_preferences_foundation:
+    dependency: transitive
+    description:
+      name: shared_preferences_foundation
+      sha256: e014107bb79d6d3297196f4f2d0db54b5d1f85b8ea8ff63b8e8b391a02700feb
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.2"
+  shared_preferences_linux:
+    dependency: transitive
+    description:
+      name: shared_preferences_linux
+      sha256: "9d387433ca65717bbf1be88f4d5bb18f10508917a8fa2fb02e0fd0d7479a9afa"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
+  shared_preferences_platform_interface:
+    dependency: transitive
+    description:
+      name: shared_preferences_platform_interface
+      sha256: fb5cf25c0235df2d0640ac1b1174f6466bd311f621574997ac59018a6664548d
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
+  shared_preferences_web:
+    dependency: transitive
+    description:
+      name: shared_preferences_web
+      sha256: "74083203a8eae241e0de4a0d597dbedab3b8fef5563f33cf3c12d7e93c655ca5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
+  shared_preferences_windows:
+    dependency: transitive
+    description:
+      name: shared_preferences_windows
+      sha256: "5e588e2efef56916a3b229c3bfe81e6a525665a454519ca51dbcc4236a274173"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   sign_in_with_apple:
     dependency: transitive
     description:
@@ -413,6 +501,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  smooth_page_indicator:
+    dependency: transitive
+    description:
+      name: smooth_page_indicator
+      sha256: "725bc638d5e79df0c84658e1291449996943f93bacbc2cec49963dbbab48d8ae"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   source_span:
     dependency: transitive
     description:
@@ -421,6 +517,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  spring_button:
+    dependency: transitive
+    description:
+      name: spring_button
+      sha256: b6d0839fc711a691d14159cf3feb499f9067ba5542630d1db0effac3c9fd2dae
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   stack_trace:
     dependency: transitive
     description:

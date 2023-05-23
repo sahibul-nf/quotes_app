@@ -10,6 +10,7 @@ import '../../utils/random_colors.dart';
 import '../themes/colors.dart';
 import '../themes/typography.dart';
 import '../widgets/icon_solid_light.dart';
+import 'create_quote_page.dart';
 import 'quote_detail_page.dart';
 
 class QuotesByMePage extends ConsumerWidget {
@@ -17,7 +18,7 @@ class QuotesByMePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quotesState = ref.watch(quotesProvider);
+    final quotesState = ref.watch(getQuotesProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -32,6 +33,13 @@ class QuotesByMePage extends ConsumerWidget {
         actions: [
           IconSolidLight(
             icon: PhosphorIcons.regular.plus,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const CreateQuotePage(),
+                ),
+              );
+            },
           ),
           const SizedBox(width: 20),
         ],
