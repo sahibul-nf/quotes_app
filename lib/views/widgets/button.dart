@@ -26,3 +26,31 @@ class PrimaryButton extends StatelessWidget {
     );
   }
 }
+
+class SecondaryButton extends StatelessWidget {
+  const SecondaryButton({super.key, this.onPressed, required this.child});
+  final Function()? onPressed;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 50,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+            side: BorderSide(
+              color: MyColors.primary,
+            ),
+          ),
+        ),
+        child: child,
+      ),
+    );
+  }
+}
