@@ -4,6 +4,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:quotes_app/views/pages/signup_page.dart';
 import 'package:quotes_app/views/themes/colors.dart';
 
+import '../menu.dart';
 import '../themes/typography.dart';
 import '../widgets/button.dart';
 import '../widgets/icon_solid_light.dart';
@@ -17,6 +18,7 @@ class SignInPage extends ConsumerWidget {
       backgroundColor: MyColors.secondary,
       appBar: AppBar(
         elevation: 0,
+        backgroundColor: MyColors.secondary,
         leadingWidth: 76,
         leading: IconSolidLight(
           icon: PhosphorIcons.regular.caretLeft,
@@ -136,7 +138,14 @@ class SignInPage extends ConsumerWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Menu(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 30),
               // Social Media Buttons
