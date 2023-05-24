@@ -1,6 +1,7 @@
-import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:quotes_app/views/themes/colors.dart';
+import 'package:quotes_app/pages/my_profile_page.dart';
+import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 
 enum _SelectedTab { quotes, create, favorite, profile }
 
@@ -35,6 +36,7 @@ class _MenuState extends State<Menu> {
           Container(
             color: MyColors.primary,
           ),
+          const MyProfile(),
           Container(
             color: MyColors.secondary,
           ),
