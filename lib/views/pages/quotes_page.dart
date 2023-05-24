@@ -5,7 +5,6 @@ import 'package:quotes_app/controllers/quotes_controller.dart';
 import 'package:quotes_app/utils/random_colors.dart';
 import 'package:quotes_app/views/pages/quote_detail_page.dart';
 import 'package:quotes_app/views/pages/search_page.dart';
-import 'package:quotes_app/views/pages/signin_page.dart';
 import 'package:quotes_app/views/themes/colors.dart';
 import 'package:quotes_app/views/themes/typography.dart';
 import 'package:quotes_app/views/widgets/icon_solid_light.dart';
@@ -31,17 +30,6 @@ class QuotesPage extends ConsumerWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => const SearchPage(),
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(width: 10),
-              IconSolidLight(
-                icon: PhosphorIcons.regular.user,
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const SignInPage(),
                     ),
                   );
                 },
