@@ -17,6 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.10.0"
+  auto_size_text:
+    dependency: "direct main"
+    description:
+      name: auto_size_text
+      sha256: "3f5261cd3fb5f2a9ab4e2fc3fba84fd9fcaac8821f20a1d4e71f557521b22599"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -73,6 +81,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1+4"
+  dotted_decoration:
+    dependency: "direct main"
+    description:
+      name: dotted_decoration
+      sha256: a5c5771367690b4f64ebfa7911954ab472b9675f025c373f514e32ac4bb81d5e
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -81,6 +97,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+  fast_color_picker:
+    dependency: "direct main"
+    description:
+      name: fast_color_picker
+      sha256: "7fde92f29cf38cb3ee68fbd20b2603d182fbc0a944e3849debd4f78052ce4882"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.1"
   ffi:
     dependency: transitive
     description:
@@ -110,6 +134,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.2"
+  flutter_font_picker:
+    dependency: "direct main"
+    description:
+      name: flutter_font_picker
+      sha256: f6f289be0c77232bd52f173a9e5a61d70517aea0d5117cc911e4b18f23abc0aa
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -118,6 +150,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  flutter_riverpod:
+    dependency: "direct main"
+    description:
+      name: flutter_riverpod
+      sha256: b83ac5827baadefd331ea1d85110f34645827ea234ccabf53a655f41901a9bf4
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.6"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -160,6 +200,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.6.0"
+  group_button:
+    dependency: "direct main"
+    description:
+      name: group_button
+      sha256: "1382097b97589a66601fbfdf244dc3214e396724ea43899c481fcd40f0d89298"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.3.0"
   hive:
     dependency: transitive
     description:
@@ -177,7 +225,7 @@ packages:
     source: hosted
     version: "1.1.0"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       sha256: "5895291c13fa8a3bd82e76d5627f69e0d85ca6a30dcac95c4ea19a5d555879c2"
@@ -304,6 +352,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.6"
+  phosphor_flutter:
+    dependency: "direct main"
+    description:
+      name: phosphor_flutter
+      sha256: "925b6e2031886d5fe0b3719a0497712d26914bdb8e74c217fe990a9c6d60184d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   platform:
     dependency: transitive
     description:
@@ -352,6 +408,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
+  riverpod:
+    dependency: transitive
+    description:
+      name: riverpod
+      sha256: "80e48bebc83010d5e67a11c9514af6b44bbac1ec77b4333c8ea65dbc79e2d8ef"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.6"
   rxdart:
     dependency: transitive
     description:
@@ -360,6 +424,62 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
+  shared_preferences:
+    dependency: transitive
+    description:
+      name: shared_preferences
+      sha256: "16d3fb6b3692ad244a695c0183fca18cf81fd4b821664394a781de42386bf022"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
+  shared_preferences_android:
+    dependency: transitive
+    description:
+      name: shared_preferences_android
+      sha256: "6478c6bbbecfe9aced34c483171e90d7c078f5883558b30ec3163cf18402c749"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.4"
+  shared_preferences_foundation:
+    dependency: transitive
+    description:
+      name: shared_preferences_foundation
+      sha256: e014107bb79d6d3297196f4f2d0db54b5d1f85b8ea8ff63b8e8b391a02700feb
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.2"
+  shared_preferences_linux:
+    dependency: transitive
+    description:
+      name: shared_preferences_linux
+      sha256: "9d387433ca65717bbf1be88f4d5bb18f10508917a8fa2fb02e0fd0d7479a9afa"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
+  shared_preferences_platform_interface:
+    dependency: transitive
+    description:
+      name: shared_preferences_platform_interface
+      sha256: fb5cf25c0235df2d0640ac1b1174f6466bd311f621574997ac59018a6664548d
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
+  shared_preferences_web:
+    dependency: transitive
+    description:
+      name: shared_preferences_web
+      sha256: "74083203a8eae241e0de4a0d597dbedab3b8fef5563f33cf3c12d7e93c655ca5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
+  shared_preferences_windows:
+    dependency: transitive
+    description:
+      name: shared_preferences_windows
+      sha256: "5e588e2efef56916a3b229c3bfe81e6a525665a454519ca51dbcc4236a274173"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   sign_in_with_apple:
     dependency: transitive
     description:
@@ -389,6 +509,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  smooth_page_indicator:
+    dependency: transitive
+    description:
+      name: smooth_page_indicator
+      sha256: "725bc638d5e79df0c84658e1291449996943f93bacbc2cec49963dbbab48d8ae"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   source_span:
     dependency: transitive
     description:
@@ -397,6 +525,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  spring_button:
+    dependency: transitive
+    description:
+      name: spring_button
+      sha256: b6d0839fc711a691d14159cf3feb499f9067ba5542630d1db0effac3c9fd2dae
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   stack_trace:
     dependency: transitive
     description:
@@ -405,6 +541,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  staggered_grid_view_flutter:
+    dependency: "direct main"
+    description:
+      name: staggered_grid_view_flutter
+      sha256: d46b27d1b57344945edf9eadbd5ee03a667a6599fd87e79f9a2d5e717e6accf3
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
+  state_notifier:
+    dependency: transitive
+    description:
+      name: state_notifier
+      sha256: "8fe42610f179b843b12371e40db58c9444f8757f8b69d181c97e50787caed289"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.2+1"
   storage_client:
     dependency: transitive
     description:

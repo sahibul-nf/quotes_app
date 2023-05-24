@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quotes_app/views/pages/favorite_page.dart';
+import 'package:quotes_app/views/pages/quotes_by_me_page.dart';
+import 'package:quotes_app/views/pages/quotes_page.dart';
 import 'package:quotes_app/views/themes/colors.dart';
 import 'package:quotes_app/pages/my_profile_page.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
@@ -27,19 +30,13 @@ class _MenuState extends State<Menu> {
       body: IndexedStack(
         index: _SelectedTab.values.indexOf(_selectedTab),
         children: [
-          Container(
-            color: MyColors.primary,
-          ),
-          Container(
-            color: MyColors.secondary,
-          ),
+          const QuotesPage(),
+          const QuotesByMePage(),
+          const FavoritePage(),
           Container(
             color: MyColors.primary,
           ),
           const MyProfile(),
-          Container(
-            color: MyColors.secondary,
-          ),
         ],
       ),
       extendBody: true,
@@ -54,6 +51,7 @@ class _MenuState extends State<Menu> {
           horizontal: 10,
         ),
         enablePaddingAnimation: false,
+        selectedItemColor: MyColors.secondary,
         items: [
           DotNavigationBarItem(
             icon: Image.asset(
