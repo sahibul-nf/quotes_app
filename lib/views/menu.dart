@@ -33,7 +33,7 @@ class _MenuState extends State<Menu> {
           const QuotesByMePage(),
           const FavoritePage(),
           Container(
-            color: MyColors.secondary,
+            color: MyColors.primary,
           ),
         ],
       ),
@@ -49,6 +49,7 @@ class _MenuState extends State<Menu> {
           horizontal: 10,
         ),
         enablePaddingAnimation: false,
+        selectedItemColor: MyColors.secondary,
         items: [
           DotNavigationBarItem(
             icon: Image.asset(

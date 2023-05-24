@@ -9,18 +9,36 @@ final quotesRepositoryProvider =
     Provider<QuotesRepository>((ref) => QuotesRepository());
 
 class QuotesRepository {
-  
   Future<List<Quotable>> getQuotes() async {
-    final response =
-        await http.get(Uri.parse('$baseUrl$quotesPath$randomPath?limit=20'));
+    final response = await http.get(
+      Uri.parse('$baseUrl$quotesPath$randomPath?limit=20'),
+    );
 
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-
-      final quotes = (data as List).map((e) => Quotable.fromJson(e)).toList();
-      return quotes;
-    } else {
+    if (response.statusCode != 200) {
       throw Exception('Failed to load quotes');
     }
+
+    final data = jsonDecode(response.body);
+
+    final quotes = (data as List).map((e) => Quotable.fromJson(e)).toList();
+    return quotes;
+  }
+
+  Future<List<Quotable>> searchQuotes(String query) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl$searchPath$quotesPath?query=$query'),
+    );
+
+    if (response.statusCode != 200) {
+      throw "Something went wrong";
+    }
+
+    final json = jsonDecode(response.body);
+    final data = json['results'] as List;
+
+    print(data);
+
+    final quotes = data.map((e) => Quotable.fromJson(e)).toList();
+    return quotes;
   }
 }

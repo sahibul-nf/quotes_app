@@ -23,7 +23,7 @@ class FavoritePage extends ConsumerWidget {
       "Lorem ipsum dolor sit amet."
     ];
 
-    final quotesState = ref.watch(quotesProvider);
+    final quotesState = ref.watch(getQuotesProvider);
 
     return Scaffold(
       appBar: AppBar(

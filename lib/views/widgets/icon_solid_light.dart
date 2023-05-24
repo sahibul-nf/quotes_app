@@ -9,9 +9,10 @@ class IconSolidLight extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: UnconstrainedBox(
+    return UnconstrainedBox(
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(50),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(50),
           child: Container(
