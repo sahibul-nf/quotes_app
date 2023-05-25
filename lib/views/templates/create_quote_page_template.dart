@@ -37,6 +37,7 @@ class _CreateQuotePageState extends ConsumerState<CreateQuotePage> {
 
   var contentController = TextEditingController();
   var authorController = TextEditingController();
+  var professionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +134,6 @@ class _CreateQuotePageState extends ConsumerState<CreateQuotePage> {
                             hintText: "Write a quote here",
                             hintStyle: selectedFont != null
                                 ? selectedFont!.toTextStyle().copyWith(
-                                      // color: Colors.grey[200],
                                       color: textColor,
                                       fontSize: fontSize,
                                     )
@@ -174,23 +174,66 @@ class _CreateQuotePageState extends ConsumerState<CreateQuotePage> {
                         bottomRight: Radius.circular(25),
                       ),
                     ),
-                    child: TextField(
-                      controller: authorController,
-                      cursorColor: textColor,
-                      decoration: InputDecoration(
-                        hintText: "Author name",
-                        border: InputBorder.none,
-                        hintStyle: MyTypography.body2.copyWith(
-                          fontWeight: fontWeight,
-                          color: textColor,
+                    child: Row(
+                      children: [
+                        Flexible(
+                          child: TextField(
+                            controller: authorController,
+                            cursorColor: textColor,
+                            decoration: InputDecoration(
+                              hintText: "Author name",
+                              border: InputBorder.none,
+                              hintStyle: MyTypography.body2.copyWith(
+                                fontWeight: fontWeight,
+                                color: textColor,
+                              ),
+                            ),
+                            style: MyTypography.body2.copyWith(
+                              color: textColor,
+                            ),
+                          ),
                         ),
-                      ),
-                      style: MyTypography.body2.copyWith(
-                        color: textColor,
-                      ),
+                        Container(
+                          color: Colors.white,
+                          height: 30,
+                          width: 1,
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 10.0,
+                          ),
+                        ),
+                        Flexible(
+                          child: TextField(
+                            controller: professionController,
+                            cursorColor: textColor,
+                            textAlign: TextAlign.end,
+                            decoration: InputDecoration(
+                              hintText: "Profession",
+                              border: InputBorder.none,
+                              hintStyle: MyTypography.body2.copyWith(
+                                fontWeight: fontWeight,
+                                color: textColor,
+                              ),
+                            ),
+                            style: MyTypography.body2.copyWith(
+                              color: textColor,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: 10),
+              // note
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Text(
+                  "Note: If you dont fill Author name and Profession, we will use your name and profession.",
+                  style: MyTypography.caption1.copyWith(
+                    color: MyColors.black,
+                  ),
+                ),
               ),
               const SizedBox(height: 30),
               // Font Weight
