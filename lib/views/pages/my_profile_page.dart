@@ -14,6 +14,7 @@ class MyProfile extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         toolbarHeight: 66,
         title: Text(

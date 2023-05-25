@@ -23,6 +23,7 @@ class QuotesPage extends ConsumerWidget {
           SliverAppBar.large(
             centerTitle: false,
             backgroundColor: Colors.white,
+            automaticallyImplyLeading: false,
             actions: [
               IconSolidLight(
                 icon: PhosphorIcons.regular.magnifyingGlass,

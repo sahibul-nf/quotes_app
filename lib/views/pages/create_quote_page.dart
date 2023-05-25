@@ -4,8 +4,10 @@ import 'package:flutter_font_picker/flutter_font_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:group_button/group_button.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:quotes_app/controllers/quotes_controller.dart';
 import 'package:quotes_app/utils/font_family.dart';
 
+import '../../models/quote_model.dart';
 import '../themes/colors.dart';
 import '../themes/typography.dart';
 import '../widgets/color_picker.dart';
@@ -25,11 +27,56 @@ class _CreateQuotePageState extends ConsumerState<CreateQuotePage> {
   double fontSize = 20;
   TextAlign textAlign = TextAlign.center;
   FontWeight fontWeight = FontWeight.normal;
-  PickerFont? selectedFont;
+  PickerFont? selectedFont = PickerFont(fontFamily: 'Inter');
 
   final fontSizeType = ['S', 'M', 'L', 'XL'];
   final textAlignType = ['L', 'C', 'R'];
   final fontWeightType = ['Normal', 'Bold'];
+
+  final fontWeightController = GroupButtonController(selectedIndex: 0);
+  final textAlignController = GroupButtonController(selectedIndex: 1);
+  final fontSizeController = GroupButtonController(selectedIndex: 1);
+
+  var contentController = TextEditingController();
+  var authorController = TextEditingController();
+  var professionController = TextEditingController();
+
+  void createQuote() {
+    final quote = Quote(
+      userId: '8e19a942-adc3-4cbd-ae0d-ce4251e0d3e4',
+      content: contentController.text,
+      author: authorController.text,
+      profession: professionController.text,
+      backgroundColor: backgroundColor.value,
+      textColor: textColor.value,
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      textAlign: textAlign,
+      fontFamily: selectedFont!.fontFamily,
+    );
+
+    // show loading
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Center(
+        child: CircularProgressIndicator(
+          color: MyColors.primary,
+        ),
+      ),
+    );
+
+    // trigger provider to create quote
+    ref.read(quotesProvider.notifier).createQuote(quote).then((_) {
+      // refresh quotes by me list
+      ref.refresh(quotesProvider);
+
+      // hide loading
+      Navigator.pop(context);
+      // back
+      Navigator.pop(context);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +91,30 @@ class _CreateQuotePageState extends ConsumerState<CreateQuotePage> {
           onTap: () => Navigator.pop(context),
         ),
         actions: [
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              "DONE",
-              style: MyTypography.body1.copyWith(
-                fontWeight: FontWeight.w600,
+          UnconstrainedBox(
+            child: TextButton(
+              onPressed: () {
+                if (contentController.text.isNotEmpty) {
+                  createQuote();
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.red,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      padding: const EdgeInsets.all(20),
+                      behavior: SnackBarBehavior.floating,
+                      content: const Text("Quote cannot be empty!"),
+                    ),
+                  );
+                }
+              },
+              child: Text(
+                "DONE",
+                style: MyTypography.body1.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),
@@ -86,7 +151,8 @@ class _CreateQuotePageState extends ConsumerState<CreateQuotePage> {
                     child: Center(
                       child: IntrinsicWidth(
                         child: TextField(
-                          cursorColor: Colors.white,
+                          controller: contentController,
+                          cursorColor: textColor,
                           style: selectedFont != null
                               ? selectedFont!.toTextStyle().copyWith(
                                     color: textColor,
@@ -107,7 +173,7 @@ class _CreateQuotePageState extends ConsumerState<CreateQuotePage> {
                             hintText: "Write a quote here",
                             hintStyle: selectedFont != null
                                 ? selectedFont!.toTextStyle().copyWith(
-                                      color: Colors.grey[200],
+                                      color: textColor,
                                       fontSize: fontSize,
                                     )
                                 : MyTypography.body1.copyWith(
@@ -137,8 +203,8 @@ class _CreateQuotePageState extends ConsumerState<CreateQuotePage> {
                     padding: const EdgeInsets.only(
                       left: 30.0,
                       right: 30.0,
-                      top: 20.0,
-                      bottom: 30.0,
+                      top: 5.0,
+                      bottom: 10.0,
                     ),
                     decoration: BoxDecoration(
                       color: backgroundColor,
@@ -147,14 +213,66 @@ class _CreateQuotePageState extends ConsumerState<CreateQuotePage> {
                         bottomRight: Radius.circular(25),
                       ),
                     ),
-                    child: Text(
-                      "John Smith",
-                      style: MyTypography.body2.copyWith(
-                        color: textColor,
-                      ),
+                    child: Row(
+                      children: [
+                        Flexible(
+                          child: TextField(
+                            controller: authorController,
+                            cursorColor: textColor,
+                            decoration: InputDecoration(
+                              hintText: "Author name",
+                              border: InputBorder.none,
+                              hintStyle: MyTypography.body2.copyWith(
+                                fontWeight: fontWeight,
+                                color: textColor,
+                              ),
+                            ),
+                            style: MyTypography.body2.copyWith(
+                              color: textColor,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          color: Colors.white,
+                          height: 30,
+                          width: 1,
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 10.0,
+                          ),
+                        ),
+                        Flexible(
+                          child: TextField(
+                            controller: professionController,
+                            cursorColor: textColor,
+                            textAlign: TextAlign.end,
+                            decoration: InputDecoration(
+                              hintText: "Profession",
+                              border: InputBorder.none,
+                              hintStyle: MyTypography.body2.copyWith(
+                                fontWeight: fontWeight,
+                                color: textColor,
+                              ),
+                            ),
+                            style: MyTypography.body2.copyWith(
+                              color: textColor,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: 10),
+              // note
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Text(
+                  "Note: If you dont fill Author name and Profession, we will use your name and profession.",
+                  style: MyTypography.caption1.copyWith(
+                    color: MyColors.black,
+                  ),
+                ),
               ),
               const SizedBox(height: 30),
               // Font Weight
@@ -170,6 +288,7 @@ class _CreateQuotePageState extends ConsumerState<CreateQuotePage> {
                   const SizedBox(height: 10),
                   GroupButton(
                     buttons: fontWeightType,
+                    controller: fontWeightController,
                     buttonIndexedBuilder: (selected, index, context) {
                       FontWeight fontWeight = FontWeight.normal;
 
@@ -223,6 +342,7 @@ class _CreateQuotePageState extends ConsumerState<CreateQuotePage> {
                   const SizedBox(height: 10),
                   GroupButton(
                     buttons: textAlignType,
+                    controller: textAlignController,
                     buttonIndexedBuilder: (selected, index, context) {
                       IconData? icon;
                       switch (index) {
@@ -286,6 +406,7 @@ class _CreateQuotePageState extends ConsumerState<CreateQuotePage> {
                   const SizedBox(height: 10),
                   GroupButton(
                     buttons: fontSizeType,
+                    controller: fontSizeController,
                     buttonIndexedBuilder: (selected, index, context) {
                       double? fontSize;
                       switch (index) {
@@ -372,6 +493,7 @@ class _CreateQuotePageState extends ConsumerState<CreateQuotePage> {
                               borderRadius: BorderRadius.circular(20),
                               child: FontPicker(
                                 googleFonts: myGoogleFonts,
+                                initialFontFamily: selectedFont?.fontFamily,
                                 showInDialog: true,
                                 onFontChanged: (font) {
                                   setState(() {
