@@ -28,6 +28,7 @@ class FavoritePage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         toolbarHeight: 66,
         titleSpacing: 20,

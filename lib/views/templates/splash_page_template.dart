@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quotes_app/views/menu.dart';
+
+import '../menu.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});

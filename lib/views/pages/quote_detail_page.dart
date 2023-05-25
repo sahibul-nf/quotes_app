@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../themes/typography.dart';
@@ -13,13 +14,21 @@ class QuoteDetailPage extends ConsumerWidget {
     required this.author,
     required this.authorAvatar,
     required this.authorJob,
+    this.fontFamily,
+    this.fontSize = 24,
+    this.textAlign = TextAlign.center,
     this.cardColor,
+    this.textColor,
   });
   final String content;
   final String author;
   final String authorAvatar;
-  final String authorJob;
+  final String? authorJob;
   final Color? cardColor;
+  final Color? textColor;
+  final TextAlign textAlign;
+  final double fontSize;
+  final String? fontFamily;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -57,7 +66,7 @@ class QuoteDetailPage extends ConsumerWidget {
             Icon(
               PhosphorIcons.fill.quotes,
               size: 70,
-              color: Colors.white,
+              color: textColor,
             ),
             const SizedBox(height: 20),
             Expanded(
@@ -66,49 +75,55 @@ class QuoteDetailPage extends ConsumerWidget {
                 maxFontSize: 28,
                 minFontSize: 18,
                 maxLines: 10,
-                textAlign: TextAlign.center,
-                style: MyTypography.body1.copyWith(
-                  color: Colors.white,
-                  fontSize: 24,
+                textAlign: textAlign,
+                style: GoogleFonts.getFont(
+                  fontFamily!,
+                  color: textColor,
+                  fontSize: fontSize,
                   fontWeight: FontWeight.w600,
                   height: 1.3,
                 ),
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 30),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircleAvatar(
                   radius: 20,
                   backgroundImage: AssetImage(authorAvatar),
                 ),
                 const SizedBox(width: 16),
-                Expanded(
+                Flexible(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         author,
                         style: MyTypography.body2.copyWith(
-                          color: Colors.white,
+                          color: textColor,
                           fontWeight: FontWeight.w600,
                           letterSpacing: 0.5,
                         ),
                       ),
-                      const SizedBox(height: 5),
-                      Text(
-                        authorJob,
-                        style: MyTypography.caption1.copyWith(
-                          color: Colors.white70,
+                      if (authorJob != null || authorJob != "")
+                        const SizedBox(height: 5),
+                      if (authorJob != null)
+                        Text(
+                          authorJob!,
+                          style: MyTypography.body2.copyWith(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: textColor,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
                     ],
                   ),
                 )
               ],
             ),
-            const SizedBox(height: 70),
+            const SizedBox(height: 60),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
