@@ -19,15 +19,14 @@ class QuoteDetailPage extends ConsumerWidget {
   final Quote quote;
 
   void onTapFavorite(bool isFavorite, WidgetRef ref) {
-    if (isFavorite) {
-      ref.read(favoriteProvider.notifier).deleteFavoriteQuote(quote).then((_) {
-        ref.refresh(favoriteProvider);
-      });
-    } else {
-      ref.read(favoriteProvider.notifier).addFavoriteQuote(quote).then((_) {
-        ref.refresh(favoriteProvider);
-      });
-    }
+    print(isFavorite);
+
+    ref
+        .read(favoriteProvider.notifier)
+        .toggleFavorite(quote, isFavorite)
+        .then((_) {
+      ref.refresh(favoriteProvider);
+    });
   }
 
   @override
@@ -83,7 +82,7 @@ class QuoteDetailPage extends ConsumerWidget {
                 style: GoogleFonts.getFont(
                   quote.fontFamily,
                   color: Color(quote.textColor),
-                  fontSize: quote.fontSize,
+                  fontSize: quote.fontSize ?? 28,
                   fontWeight: FontWeight.w600,
                   height: 1.3,
                 ),
@@ -130,22 +129,30 @@ class QuoteDetailPage extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                favoriteQuotesState.isLoading
-                    ? ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
-                        child: Container(
-                          color: MyColors.secondary,
-                          padding: const EdgeInsets.all(5),
-                          child: const CircularProgressIndicator(),
+                if (quote.id != null)
+                  favoriteQuotesState.isLoading
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(50),
+                          child: Container(
+                            color: MyColors.secondary,
+                            padding: const EdgeInsets.all(10),
+                            child: SizedBox(
+                              height: 24,
+                              width: 24,
+                              child: CircularProgressIndicator(
+                                color: MyColors.primaryDark,
+                                strokeWidth: 3,
+                              ),
+                            ),
+                          ),
+                        )
+                      : IconSolidLight(
+                          onTap: () => onTapFavorite(isFavorite, ref),
+                          icon: isFavorite
+                              ? PhosphorIcons.fill.heart
+                              : PhosphorIcons.regular.heart,
                         ),
-                      )
-                    : IconSolidLight(
-                        onTap: () => onTapFavorite(isFavorite, ref),
-                        icon: isFavorite
-                            ? PhosphorIcons.fill.heart
-                            : PhosphorIcons.regular.heart,
-                      ),
-                const SizedBox(width: 16),
+                if (quote.id != null) const SizedBox(width: 16),
                 // share button with icon
                 ElevatedButton.icon(
                   onPressed: () {},

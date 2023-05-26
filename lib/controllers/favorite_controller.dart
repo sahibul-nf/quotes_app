@@ -30,18 +30,23 @@ class FavoriteController extends StateNotifier<AsyncValue<List<Quote>?>> {
     state = AsyncValue.data(result);
   }
 
-  Future<void> addFavoriteQuote(Quote quote) async {
+  Future<void> toggleFavorite(Quote quote, bool isFavorite) async {
     state = const AsyncValue.loading();
 
-    await favoriteRepository.addFavoriteQuote(quote);
+    if (isFavorite) {
+      await favoriteRepository.deleteFavoriteQuote(quote);
+    } else {
+      await favoriteRepository.addFavoriteQuote(quote);
+    }
 
     state = const AsyncValue.data(null);
   }
 
-  Future<void> deleteFavoriteQuote(Quote quote) async {
+  // delete all favorite quotes
+  Future<void> deleteAllFavoriteQuotes(String userId) async {
     state = const AsyncValue.loading();
 
-    await favoriteRepository.deleteFavoriteQuote(quote);
+    await favoriteRepository.deleteAllFavoriteQuotes(userId);
 
     state = const AsyncValue.data(null);
   }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as sp;
@@ -50,6 +52,16 @@ class FavoriteRepository {
 
     try {
       await supabase.from('favorites').delete().match(data);
+    } catch (e) {
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
+
+  // delete all favorite quotes
+Future<void> deleteAllFavoriteQuotes(String userId) async {
+    try {
+      await supabase.from('favorites').delete().match({'user_id': userId});
     } catch (e) {
       debugPrint(e.toString());
       rethrow;

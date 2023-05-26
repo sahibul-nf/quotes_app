@@ -79,11 +79,9 @@ class QuotesPage extends ConsumerWidget {
                             backgroundColor: cardColor.value,
                             textColor: Colors.white.value,
                             fontFamily: 'Inter',
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            textAlign: TextAlign.center,
+                            fontWeight: FontWeight.w500,
+                            textAlign: TextAlign.left,
                             userId: '8e19a942-adc3-4cbd-ae0d-ce4251e0d3e4',
-                            profession: '',
                           );
 
                           Navigator.of(context).push(

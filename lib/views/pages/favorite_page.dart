@@ -38,9 +38,34 @@ class FavoritePage extends ConsumerWidget {
           style: MyTypography.h3,
         ),
         actions: [
-          IconSolidLight(
-            icon: PhosphorIcons.regular.trashSimple,
-          ),
+          favoriteQuotesState.isLoading
+              ? UnconstrainedBox(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: Container(
+                      color: MyColors.secondary,
+                      padding: const EdgeInsets.all(10),
+                      child: SizedBox(
+                        height: 24,
+                        width: 24,
+                        child: CircularProgressIndicator(
+                          color: MyColors.primaryDark,
+                          strokeWidth: 3,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              : IconSolidLight(
+                  icon: PhosphorIcons.regular.trashSimple,
+                  onTap: () {
+                    const userId = '8e19a942-adc3-4cbd-ae0d-ce4251e0d3e4';
+
+                    ref
+                        .read(favoriteProvider.notifier)
+                        .deleteAllFavoriteQuotes(userId);
+                  },
+                ),
           const SizedBox(width: 20),
         ],
       ),
