@@ -82,14 +82,7 @@ class QuotesByMePage extends ConsumerWidget {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => QuoteDetailPage(
-                            content: quotes[index].content,
-                            author: quotes[index].author,
-                            authorAvatar: "assets/img_avatar.png",
-                            authorJob: quotes[index].profession,
-                            cardColor: cardColor,
-                            textColor: textColor,
-                            textAlign: quotes[index].textAlign,
-                            fontFamily: quotes[index].fontFamily,
+                            quote: quotes[index],
                           ),
                         ),
                       );

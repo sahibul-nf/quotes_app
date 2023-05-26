@@ -4,6 +4,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 
+import '../../models/quote_model.dart';
 import '../../utils/random_colors.dart';
 import '../pages/quote_detail_page.dart';
 import '../themes/typography.dart';
@@ -56,15 +57,24 @@ class QuotesByMePage extends StatelessWidget {
 
             return InkWell(
               onTap: () {
+                final quote = Quote(
+                  author: 'Rick Riordan',
+                  content:
+                      'The best way to get started is to quit talking and begin doing.',
+                  backgroundColor: Colors.blue.value,
+                  textColor: Colors.white.value,
+                  fontFamily: 'Inter',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  textAlign: TextAlign.center,
+                  userId: '',
+                  profession: 'CEO of The Walt Disney Company',
+                );
+
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => QuoteDetailPage(
-                      content: items[index],
-                      // "The best way to get started is to quit talking and begin doing. The best way to get started is to quit talking and begin doing. The best way to get started is to quit talking and begin doing.",
-                      author: 'John Doe',
-                      authorAvatar: "assets/img_avatar.png",
-                      authorJob: "Co-Founder of The Walt Disney Company",
-                      cardColor: cardColor,
+                      quote: quote,
                     ),
                   ),
                 );

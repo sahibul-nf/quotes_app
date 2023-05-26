@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:quotes_app/controllers/quotes_controller.dart';
+import 'package:quotes_app/models/quote_model.dart';
 import 'package:quotes_app/utils/random_colors.dart';
 import 'package:quotes_app/views/pages/quote_detail_page.dart';
 import 'package:quotes_app/views/pages/search_page.dart';
@@ -72,16 +73,23 @@ class QuotesPage extends ConsumerWidget {
                       ),
                       child: InkWell(
                         onTap: () {
+                          final quote = Quote(
+                            author: quotes[index].author!,
+                            content: quotes[index].content!,
+                            backgroundColor: cardColor.value,
+                            textColor: Colors.white.value,
+                            fontFamily: 'Inter',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            textAlign: TextAlign.center,
+                            userId: '8e19a942-adc3-4cbd-ae0d-ce4251e0d3e4',
+                            profession: '',
+                          );
+
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => QuoteDetailPage(
-                                content: quotes[index].content!,
-                                // "The best way to get started is to quit talking and begin doing. The best way to get started is to quit talking and begin doing. The best way to get started is to quit talking and begin doing.",
-                                author: quotes[index].author!,
-                                authorAvatar: "assets/img_avatar.png",
-                                authorJob:
-                                    "Co-Founder of The Walt Disney Company",
-                                cardColor: cardColor,
+                                quote: quote,
                               ),
                             ),
                           );

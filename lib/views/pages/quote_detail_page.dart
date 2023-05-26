@@ -4,34 +4,38 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
+import '../../controllers/favorite_controller.dart';
+import '../../models/quote_model.dart';
+import '../themes/colors.dart';
 import '../themes/typography.dart';
 import '../widgets/icon_solid_light.dart';
 
 class QuoteDetailPage extends ConsumerWidget {
   const QuoteDetailPage({
     super.key,
-    required this.content,
-    required this.author,
-    required this.authorAvatar,
-    required this.authorJob,
-    this.fontFamily,
-    this.fontSize = 24,
-    this.textAlign = TextAlign.center,
-    this.cardColor,
-    this.textColor,
+    required this.quote,
   });
-  final String content;
-  final String author;
-  final String authorAvatar;
-  final String? authorJob;
-  final Color? cardColor;
-  final Color? textColor;
-  final TextAlign textAlign;
-  final double fontSize;
-  final String? fontFamily;
+
+  final Quote quote;
+
+  void onTapFavorite(bool isFavorite, WidgetRef ref) {
+    if (isFavorite) {
+      ref.read(favoriteProvider.notifier).deleteFavoriteQuote(quote).then((_) {
+        ref.refresh(favoriteProvider);
+      });
+    } else {
+      ref.read(favoriteProvider.notifier).addFavoriteQuote(quote).then((_) {
+        ref.refresh(favoriteProvider);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final favoriteQuotesState = ref.watch(favoriteProvider);
+
+    final isFavorite = ref.watch(favoriteProvider.notifier).isFavorite(quote);
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -58,7 +62,7 @@ class QuoteDetailPage extends ConsumerWidget {
           vertical: 50,
         ),
         decoration: BoxDecoration(
-          color: cardColor,
+          color: Color(quote.backgroundColor),
           borderRadius: BorderRadius.circular(36),
         ),
         child: Column(
@@ -66,20 +70,20 @@ class QuoteDetailPage extends ConsumerWidget {
             Icon(
               PhosphorIcons.fill.quotes,
               size: 70,
-              color: textColor,
+              color: Color(quote.textColor),
             ),
             const SizedBox(height: 20),
             Expanded(
               child: AutoSizeText(
-                content,
+                quote.content,
                 maxFontSize: 28,
                 minFontSize: 18,
                 maxLines: 10,
-                textAlign: textAlign,
+                textAlign: quote.textAlign,
                 style: GoogleFonts.getFont(
-                  fontFamily!,
-                  color: textColor,
-                  fontSize: fontSize,
+                  quote.fontFamily,
+                  color: Color(quote.textColor),
+                  fontSize: quote.fontSize,
                   fontWeight: FontWeight.w600,
                   height: 1.3,
                 ),
@@ -89,9 +93,9 @@ class QuoteDetailPage extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 20,
-                  backgroundImage: AssetImage(authorAvatar),
+                  backgroundImage: AssetImage('assets/avatar.png'),
                 ),
                 const SizedBox(width: 16),
                 Flexible(
@@ -99,22 +103,21 @@ class QuoteDetailPage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        author,
+                        quote.author,
                         style: MyTypography.body2.copyWith(
-                          color: textColor,
+                          color: Color(quote.textColor),
                           fontWeight: FontWeight.w600,
                           letterSpacing: 0.5,
                         ),
                       ),
-                      if (authorJob != null || authorJob != "")
-                        const SizedBox(height: 5),
-                      if (authorJob != null)
+                      if (quote.profession != null) const SizedBox(height: 5),
+                      if (quote.profession != null)
                         Text(
-                          authorJob!,
+                          quote.profession!,
                           style: MyTypography.body2.copyWith(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
-                            color: textColor,
+                            color: Color(quote.textColor),
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -127,9 +130,21 @@ class QuoteDetailPage extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconSolidLight(
-                  icon: PhosphorIcons.fill.heart,
-                ),
+                favoriteQuotesState.isLoading
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(50),
+                        child: Container(
+                          color: MyColors.secondary,
+                          padding: const EdgeInsets.all(5),
+                          child: const CircularProgressIndicator(),
+                        ),
+                      )
+                    : IconSolidLight(
+                        onTap: () => onTapFavorite(isFavorite, ref),
+                        icon: isFavorite
+                            ? PhosphorIcons.fill.heart
+                            : PhosphorIcons.regular.heart,
+                      ),
                 const SizedBox(width: 16),
                 // share button with icon
                 ElevatedButton.icon(
