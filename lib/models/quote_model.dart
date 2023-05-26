@@ -8,7 +8,7 @@ class Quote {
   final String? profession;
   final int backgroundColor;
   final int textColor;
-  final double fontSize;
+  final double? fontSize;
   final FontWeight fontWeight;
   final TextAlign textAlign;
   final String fontFamily;
@@ -18,13 +18,13 @@ class Quote {
     required this.userId,
     required this.content,
     required this.author,
-    required this.profession,
+    this.profession,
     required this.backgroundColor,
     required this.textColor,
-    required this.fontSize,
     required this.fontWeight,
     required this.textAlign,
     required this.fontFamily,
+    this.fontSize,
   });
 
   factory Quote.fromJson(Map<String, dynamic> json) {
@@ -63,7 +63,7 @@ class Quote {
       'profession': profession,
       'background_color': backgroundColor,
       'text_color': textColor,
-      'font_size': fontSize.toInt(),
+      'font_size': fontSize?.toInt() ?? 28,
       'font_weight': fontWeight.index,
       'text_align': textAlign.index,
       'font_family': fontFamily,

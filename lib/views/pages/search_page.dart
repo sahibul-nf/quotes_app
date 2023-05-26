@@ -7,6 +7,7 @@ import 'package:quotes_app/views/themes/colors.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 
+import '../../models/quote_model.dart';
 import '../../utils/random_colors.dart';
 import '../pages/quote_detail_page.dart';
 import '../themes/typography.dart';
@@ -188,15 +189,23 @@ class _SearchPageState extends ConsumerState<SearchPage> {
 
               return InkWell(
                 onTap: () {
+                  final quote = Quote(
+                    author: quotes[index].author!,
+                    content: quotes[index].content!,
+                    backgroundColor: cardColor.value,
+                    textColor: Colors.white.value,
+                    fontFamily: 'Inter',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    textAlign: TextAlign.center,
+                    userId: '',
+                    profession: '',
+                  );
+                  
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => QuoteDetailPage(
-                        content: quotes[index].content!,
-                        // "The best way to get started is to quit talking and begin doing. The best way to get started is to quit talking and begin doing. The best way to get started is to quit talking and begin doing.",
-                        author: quotes[index].author!,
-                        authorAvatar: "assets/img_avatar.png",
-                        authorJob: "Co-Founder of The Walt Disney Company",
-                        cardColor: cardColor,
+                        quote: quote,
                       ),
                     ),
                   );
