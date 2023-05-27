@@ -4,14 +4,16 @@ import 'package:flutter_font_picker/flutter_font_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:group_button/group_button.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:quotes_app/controllers/quotes_controller.dart';
-import 'package:quotes_app/utils/font_family.dart';
 
+import '../../controllers/quotes_controller.dart';
+import '../../controllers/user_controller.dart';
 import '../../models/quote_model.dart';
+import '../../utils/font_family.dart';
 import '../themes/colors.dart';
 import '../themes/typography.dart';
 import '../widgets/color_picker.dart';
 import '../widgets/icon_solid_light.dart';
+import '../widgets/snackbar.dart';
 
 class CreateQuotePage extends ConsumerStatefulWidget {
   const CreateQuotePage({super.key});
@@ -42,8 +44,11 @@ class _CreateQuotePageState extends ConsumerState<CreateQuotePage> {
   var professionController = TextEditingController();
 
   void createQuote() {
+    String userId = ref.watch(userProvider)!.id;
+
+    // create quote object
     final quote = Quote(
-      userId: '8e19a942-adc3-4cbd-ae0d-ce4251e0d3e4',
+      userId: userId,
       content: contentController.text,
       author: authorController.text,
       profession: professionController.text,
@@ -75,6 +80,12 @@ class _CreateQuotePageState extends ConsumerState<CreateQuotePage> {
       Navigator.pop(context);
       // back
       Navigator.pop(context);
+    }).onError((error, stackTrace) {
+      // hide loading
+      Navigator.pop(context);
+
+      // show snackbar
+      showSnackbar(context, error.toString());
     });
   }
 
@@ -97,17 +108,7 @@ class _CreateQuotePageState extends ConsumerState<CreateQuotePage> {
                 if (contentController.text.isNotEmpty) {
                   createQuote();
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      backgroundColor: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      padding: const EdgeInsets.all(20),
-                      behavior: SnackBarBehavior.floating,
-                      content: const Text("Quote cannot be empty!"),
-                    ),
-                  );
+                  showSnackbar(context, "Quote cannot be empty!");
                 }
               },
               child: Text(

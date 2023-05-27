@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quotes_app/views/pages/onboarding_page.dart';
+import 'package:quotes_app/views/auth_check.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -9,7 +9,7 @@ class SplashPage extends StatelessWidget {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const OnboardingPage(),
+          builder: (context) => const AuthCheck(),
         ),
       );
     });
@@ -17,7 +17,7 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    startSplash(context);
+    // startSplash(context);
 
     return Scaffold(
       body: Center(

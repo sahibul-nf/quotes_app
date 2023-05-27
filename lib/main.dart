@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:quotes_app/views/pages/splash_page.dart';
+import 'package:quotes_app/views/auth_check.dart';
 import 'package:quotes_app/views/themes/colors.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: const SplashPage(),
+      home: const AuthCheck(),
     );
   }
 }
