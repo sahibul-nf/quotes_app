@@ -64,7 +64,7 @@ class QuotesRepository {
       final response =
           await supabase.from('quotes').select().eq('user_id', userId);
 
-      debugPrint(response.toString());
+      debugPrint('Quotes by me: $response');
 
       List<Quote> quotes = [];
 

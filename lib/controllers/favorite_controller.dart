@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:quotes_app/controllers/user_controller.dart';
 
 import '../models/quote_model.dart';
 import '../repositories/favorite_repository.dart';
@@ -6,28 +7,32 @@ import '../repositories/favorite_repository.dart';
 final favoriteProvider =
     StateNotifierProvider<FavoriteController, AsyncValue<List<Quote>?>>((ref) {
   final repo = ref.watch(favoriteRepositoryProvider);
+  final userController = ref.watch(userProvider.notifier);
 
-  const userId = '8e19a942-adc3-4cbd-ae0d-ce4251e0d3e4';
-
-  return FavoriteController(repo)..getFavoriteQuotes(userId);
+  return FavoriteController(repo, userController)..getFavoriteQuotes();
 });
 
 class FavoriteController extends StateNotifier<AsyncValue<List<Quote>?>> {
-  FavoriteController(this.favoriteRepository)
+  FavoriteController(this.favoriteRepository, this.userController)
       : super(const AsyncValue.data(null));
 
   final FavoriteRepository favoriteRepository;
+  final UserController userController;
 
   bool isFavorite(Quote quote) {
     return state.value?.any((element) => element.id == quote.id) ?? false;
   }
 
-  Future<void> getFavoriteQuotes(String userId) async {
+  Future<void> getFavoriteQuotes() async {
     state = const AsyncValue.loading();
+
+    final userId = userController.state!.id;
 
     final result = await favoriteRepository.getFavoriteQuotes(userId);
 
-    state = AsyncValue.data(result);
+    if (mounted) {
+      state = AsyncValue.data(result);
+    }
   }
 
   Future<void> toggleFavorite(Quote quote, bool isFavorite) async {
@@ -43,9 +48,10 @@ class FavoriteController extends StateNotifier<AsyncValue<List<Quote>?>> {
   }
 
   // delete all favorite quotes
-  Future<void> deleteAllFavoriteQuotes(String userId) async {
+  Future<void> deleteAllFavoriteQuotes() async {
     state = const AsyncValue.loading();
 
+    final userId = userController.state!.id;
     await favoriteRepository.deleteAllFavoriteQuotes(userId);
 
     state = const AsyncValue.data(null);

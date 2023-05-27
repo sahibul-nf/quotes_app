@@ -21,7 +21,7 @@ class FavoriteRepository {
           .eq('user_id', userId)
           .order('created_at', ascending: false);
 
-      debugPrint(response.toString());
+      debugPrint('Favorite quotes: $response');
 
       List<Quote> quotes = [];
 

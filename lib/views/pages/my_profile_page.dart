@@ -1,16 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:quotes_app/controllers/auth_controller.dart';
+import 'package:quotes_app/views/auth_check.dart';
 
+import '../../controllers/user_controller.dart';
 import '../themes/colors.dart';
 import '../themes/typography.dart';
+import '../widgets/snackbar.dart';
 
-class MyProfile extends StatelessWidget {
+class MyProfile extends ConsumerStatefulWidget {
   const MyProfile({super.key});
 
   @override
+  ConsumerState<MyProfile> createState() => _MyProfileState();
+}
+
+class _MyProfileState extends ConsumerState<MyProfile> {
+  void onTapSignOut() async {
+    await ref.read(authProvider).signOut().then((_) {
+      final authProv = ref.watch(authProvider);
+      if (authProv.authState == AuthState.error) {
+        showSnackbar(
+          context,
+          authProv.errorMessage,
+        );
+
+        return;
+      }
+
+      Navigator.of(context).pop(
+        MaterialPageRoute(
+          builder: (context) => const AuthCheck(),
+        ),
+      );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final userState = ref.watch(userProvider);
+    final authState = ref.watch(authProvider).authState;
+
+    final username = userState!.name ?? userState.email;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -44,28 +79,32 @@ class MyProfile extends StatelessWidget {
                     image: AssetImage('assets/avatar.png'),
                   ),
                   const SizedBox(width: 16),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Kris Watson',
-                        style: GoogleFonts.inter(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: MyColors.black,
+                  Expanded(
+                    flex: 7,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          username,
+                          style: GoogleFonts.inter(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: MyColors.black,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        'Ad ullamco',
-                        style: GoogleFonts.inter(
-                          fontSize: 14,
-                          color: MyColors.black,
+                        const SizedBox(height: 5),
+                        Text(
+                          userState.profession ?? '...',
+                          style: GoogleFonts.inter(
+                            fontSize: 14,
+                            color: MyColors.black,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  const Spacer(),
+                  const SizedBox(width: 16),
                   InkWell(
                     onTap: () {},
                     child: const Image(
@@ -83,61 +122,80 @@ class MyProfile extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                InkWell(
-                  onTap: () {},
-                  borderRadius: BorderRadius.circular(15),
-                  child: Container(
-                    height: 44,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          PhosphorIcons.regular.fire,
-                          size: 16,
-                          color: MyColors.primary,
-                        ),
-                        const SizedBox(width: 6),
-                        Text(
-                          'Delete Account',
-                          style: GoogleFonts.inter(
-                            fontSize: 14,
-                            color: const Color(0xFFE05858),
+                Flexible(
+                  child: InkWell(
+                    onTap: () {},
+                    borderRadius: BorderRadius.circular(15),
+                    child: Container(
+                      height: 44,
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            PhosphorIcons.regular.fire,
+                            size: 16,
+                            color: MyColors.primary,
                           ),
-                        ),
-                      ],
+                          const SizedBox(width: 6),
+                          Text(
+                            'Delete Account',
+                            style: GoogleFonts.inter(
+                              fontSize: 14,
+                              color: const Color(0xFFE05858),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () {},
-                  borderRadius: BorderRadius.circular(15),
-                  child: Container(
-                    height: 44,
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: const Color(0xFFFEF0F1),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          PhosphorIcons.regular.signOut,
-                          size: 16,
-                          color: MyColors.primary,
-                        ),
-                        const SizedBox(width: 6),
-                        Text(
-                          'Sign Out',
-                          style: GoogleFonts.inter(
-                            fontSize: 14,
-                            color: const Color(0xFFE05858),
-                          ),
-                        ),
-                      ],
+                const SizedBox(width: 20),
+                Flexible(
+                  child: InkWell(
+                    onTap: authState == AuthState.loading
+                        ? null
+                        : () => onTapSignOut(),
+                    borderRadius: BorderRadius.circular(15),
+                    child: Container(
+                      height: 44,
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: const Color(0xFFFEF0F1),
+                      ),
+                      child: authState == AuthState.loading
+                          ? const UnconstrainedBox(
+                              child: SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
+                              ),
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  PhosphorIcons.regular.signOut,
+                                  size: 16,
+                                  color: MyColors.primary,
+                                ),
+                                const SizedBox(width: 6),
+                                Text(
+                                  'Sign Out',
+                                  style: GoogleFonts.inter(
+                                    fontSize: 14,
+                                    color: const Color(0xFFE05858),
+                                  ),
+                                ),
+                              ],
+                            ),
                     ),
                   ),
                 ),

@@ -4,16 +4,59 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:quotes_app/views/pages/signup_page.dart';
 import 'package:quotes_app/views/themes/colors.dart';
 
+import '../../controllers/auth_controller.dart';
+import '../../utils/error_handling.dart';
 import '../menu.dart';
 import '../themes/typography.dart';
 import '../widgets/button.dart';
 import '../widgets/icon_solid_light.dart';
+import '../widgets/snackbar.dart';
 
-class SignInPage extends ConsumerWidget {
+class SignInPage extends ConsumerStatefulWidget {
   const SignInPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends ConsumerState<SignInPage> {
+  final _emailController =
+      TextEditingController(text: 'sahibulnuzulfirdaus13@gmail.com');
+  final _passwordController = TextEditingController(text: 'sahibul');
+
+  Future<void> onTapSignIn() async {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+
+    String? error = ErrorHandling.checkForm(email, password);
+    if (error != null) {
+      showSnackbar(context, error);
+      return;
+    }
+
+    ref.read(authProvider).signIn(email, password).whenComplete(() {
+      final authProv = ref.watch(authProvider);
+
+      if (authProv.authState == AuthState.error) {
+        showSnackbar(
+          context,
+          authProv.errorMessage,
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Menu(),
+          ),
+        );
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final authState = ref.watch(authProvider).authState;
+
     return Scaffold(
       backgroundColor: MyColors.secondary,
       appBar: AppBar(
@@ -72,6 +115,7 @@ class SignInPage extends ConsumerWidget {
                   ),
                   const SizedBox(height: 10),
                   TextField(
+                    controller: _emailController,
                     decoration: InputDecoration(
                       hintText: "Enter your email",
                       hintStyle: MyTypography.body1.copyWith(
@@ -98,6 +142,7 @@ class SignInPage extends ConsumerWidget {
                   ),
                   const SizedBox(height: 10),
                   TextField(
+                    controller: _passwordController,
                     decoration: InputDecoration(
                       hintText: "Enter your password",
                       hintStyle: MyTypography.body1.copyWith(
@@ -131,21 +176,23 @@ class SignInPage extends ConsumerWidget {
               ),
               const SizedBox(height: 40),
               PrimaryButton(
-                child: Text(
-                  "Sign In",
-                  style: MyTypography.body1.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Menu(),
-                    ),
-                  );
-                },
+                onPressed:
+                    authState == AuthState.loading ? null : () => onTapSignIn(),
+                child: authState == AuthState.loading
+                    ? const SizedBox(
+                        width: 30,
+                        height: 30,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      )
+                    : Text(
+                        "Sign In",
+                        style: MyTypography.body1.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
               ),
               const SizedBox(height: 30),
               // Social Media Buttons

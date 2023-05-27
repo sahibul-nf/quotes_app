@@ -1,19 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:quotes_app/controllers/auth_controller.dart';
+import 'package:quotes_app/utils/error_handling.dart';
 
-import '../menu.dart';
 import '../themes/colors.dart';
 import '../themes/typography.dart';
 import '../widgets/button.dart';
 import '../widgets/icon_solid_light.dart';
+import '../widgets/snackbar.dart';
 import 'signin_page.dart';
 
-class SignUpPage extends ConsumerWidget {
+class SignUpPage extends ConsumerStatefulWidget {
   const SignUpPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends ConsumerState<SignUpPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  Future<void> onTapSignUp() async {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+
+    String? error = ErrorHandling.checkForm(email, password);
+    if (error != null) {
+      showSnackbar(context, error);
+      return;
+    }
+
+    ref.read(authProvider).signUp(email, password).whenComplete(() {
+      final authProv = ref.watch(authProvider);
+
+      if (authProv.authState == AuthState.error) {
+        showSnackbar(
+          context,
+          authProv.errorMessage,
+        );
+      } else {
+        showSnackbar(
+          context,
+          'Account created successfully! Please login.',
+          isError: false,
+        );
+
+        // back to onboarding
+        Future.delayed(const Duration(seconds: 1), () {
+          Navigator.of(context).pop();
+        });
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final authState = ref.watch(authProvider).authState;
+
     return Scaffold(
       backgroundColor: MyColors.secondary,
       appBar: AppBar(
@@ -72,6 +117,7 @@ class SignUpPage extends ConsumerWidget {
                   ),
                   const SizedBox(height: 10),
                   TextField(
+                    controller: _emailController,
                     decoration: InputDecoration(
                       hintText: "Enter your email",
                       hintStyle: MyTypography.body1.copyWith(
@@ -98,6 +144,7 @@ class SignUpPage extends ConsumerWidget {
                   ),
                   const SizedBox(height: 10),
                   TextField(
+                    controller: _passwordController,
                     decoration: InputDecoration(
                       hintText: "Enter your password",
                       hintStyle: MyTypography.body1.copyWith(
@@ -151,21 +198,23 @@ class SignUpPage extends ConsumerWidget {
               ),
               const SizedBox(height: 30),
               PrimaryButton(
-                child: Text(
-                  "Sign Up",
-                  style: MyTypography.body1.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Menu(),
-                    ),
-                  );
-                },
+                onPressed:
+                    authState == AuthState.loading ? null : () => onTapSignUp(),
+                child: authState == AuthState.loading
+                    ? const SizedBox(
+                        width: 30,
+                        height: 30,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      )
+                    : Text(
+                        "Sign Up",
+                        style: MyTypography.body1.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
               ),
               const SizedBox(height: 30),
               // Social Media Buttons

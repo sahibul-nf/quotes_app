@@ -3,6 +3,7 @@ import 'package:quotes_app/models/quotable_model.dart';
 import 'package:quotes_app/repositories/quotes_repository.dart';
 
 import '../models/quote_model.dart';
+import 'user_controller.dart';
 
 final getQuotesProvider = FutureProvider<List<Quotable>>((ref) async {
   final repo = ref.watch(quotesRepositoryProvider);
@@ -15,7 +16,7 @@ final quotesProvider =
     StateNotifierProvider<QuotesController, AsyncValue<List<Quote>?>>((ref) {
   final repo = ref.watch(quotesRepositoryProvider);
 
-  String userId = '8e19a942-adc3-4cbd-ae0d-ce4251e0d3e4';
+  String userId = ref.watch(userProvider)!.id;
 
   return QuotesController(repo)..getQuotesByMe(userId);
 });
@@ -40,6 +41,8 @@ class QuotesController extends StateNotifier<AsyncValue<List<Quote>?>> {
 
     final result = await quotesRepository.getQuotesByMe(userId);
 
-    state = AsyncValue.data(result);
+    if (mounted) {
+      state = AsyncValue.data(result);
+    }
   }
 }

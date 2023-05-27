@@ -59,11 +59,9 @@ class FavoritePage extends ConsumerWidget {
               : IconSolidLight(
                   icon: PhosphorIcons.regular.trashSimple,
                   onTap: () {
-                    const userId = '8e19a942-adc3-4cbd-ae0d-ce4251e0d3e4';
-
                     ref
                         .read(favoriteProvider.notifier)
-                        .deleteAllFavoriteQuotes(userId);
+                        .deleteAllFavoriteQuotes();
                   },
                 ),
           const SizedBox(width: 20),
