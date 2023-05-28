@@ -1,7 +1,7 @@
 
 # Quotes App
 
-<p align="center">بِسْمِ اللّهِ الرَّحْمَنِ الرَّحِيْ</p> 
+<p align="center">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيْم</p> 
 
 Hi, I'm Sahibul, I'm a Flutter Developer 🚀 from Indonesia.
 
