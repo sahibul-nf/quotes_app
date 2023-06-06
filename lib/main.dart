@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_web_frame/flutter_web_frame.dart';
 import 'package:quotes_app/views/auth_check.dart';
 import 'package:quotes_app/views/themes/colors.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -27,34 +26,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlutterWebFrame(
-      backgroundColor: Colors.grey[200],
-      maximumSize: const Size(475.0, 812.0),
-      builder: (context) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Quotes App',
-          theme: ThemeData(
-            primarySwatch: MaterialColor(
-              0xffE05858,
-              <int, Color>{
-                50: MyColors.primary.withOpacity(0.1),
-                100: MyColors.primary.withOpacity(0.2),
-                200: MyColors.primary.withOpacity(0.3),
-                300: MyColors.primary.withOpacity(0.4),
-                400: MyColors.primary.withOpacity(0.5),
-                500: MyColors.primary.withOpacity(0.6),
-                600: MyColors.primary.withOpacity(0.7),
-                700: MyColors.primary.withOpacity(0.8),
-                800: MyColors.primary.withOpacity(0.9),
-                900: MyColors.primary.withOpacity(1.0),
-              },
-            ),
-            scaffoldBackgroundColor: Colors.white,
-          ),
-          home: const AuthCheck(),
-        );
-      },
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Quotes App',
+      theme: ThemeData(
+        primarySwatch: MaterialColor(
+          0xffE05858,
+          <int, Color>{
+            50: MyColors.primary.withOpacity(0.1),
+            100: MyColors.primary.withOpacity(0.2),
+            200: MyColors.primary.withOpacity(0.3),
+            300: MyColors.primary.withOpacity(0.4),
+            400: MyColors.primary.withOpacity(0.5),
+            500: MyColors.primary.withOpacity(0.6),
+            600: MyColors.primary.withOpacity(0.7),
+            700: MyColors.primary.withOpacity(0.8),
+            800: MyColors.primary.withOpacity(0.9),
+            900: MyColors.primary.withOpacity(1.0),
+          },
+        ),
+        scaffoldBackgroundColor: Colors.white,
+      ),
+      home: const AuthCheck(),
     );
   }
 }

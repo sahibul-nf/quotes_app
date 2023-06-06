@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quotes_app/controllers/user_controller.dart';
-import 'package:quotes_app/utils/local_storage.dart';
 
 import '../models/user_model.dart';
 import '../repositories/auth_repository.dart';
@@ -88,10 +87,10 @@ class AuthController extends ChangeNotifier {
     try {
       final res = await authRepository.signIn(email, password);
 
-      final storage = LocalStorage();
-      await storage.setSession(res.session!);
+      // final storage = LocalStorage();
+      // await storage.setSession(res.session!);
 
-      User authUser = User(id: res.session!.user.id, email: res.user!.email!);
+      User authUser = User(id: res.user!.id, email: res.user!.email!);
 
       userController.setUser(authUser);
 
@@ -115,8 +114,8 @@ class AuthController extends ChangeNotifier {
     try {
       await authRepository.signOut();
 
-      final storage = LocalStorage();
-      await storage.deleteSession();
+      // final storage = LocalStorage();
+      // await storage.deleteSession();
 
       setState(AuthState.loaded);
       setAuthEvent(AuthEvent.loggedOut);
@@ -128,7 +127,7 @@ class AuthController extends ChangeNotifier {
   }
 
   // Check if user is logged in or not
-  Future<void> checkAuth() async {
+  void checkAuth() async {
     final isLoggedIn = await authRepository.isLoggedIn();
 
     if (isLoggedIn) {

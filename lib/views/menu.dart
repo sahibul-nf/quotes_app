@@ -1,7 +1,7 @@
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:quotes_app/views/pages/my_profile_page.dart';
 import 'package:quotes_app/views/pages/favorite_page.dart';
+import 'package:quotes_app/views/pages/my_profile_page.dart';
 import 'package:quotes_app/views/pages/quotes_by_me_page.dart';
 import 'package:quotes_app/views/pages/quotes_page.dart';
 import 'package:quotes_app/views/themes/colors.dart';

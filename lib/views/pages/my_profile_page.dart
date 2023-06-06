@@ -134,6 +134,7 @@ class _MyProfileState extends ConsumerState<MyProfile> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
                             PhosphorIcons.regular.fire,

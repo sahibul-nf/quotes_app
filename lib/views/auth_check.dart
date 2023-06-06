@@ -24,8 +24,7 @@ class _AuthCheckState extends ConsumerState<AuthCheck> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget handle() {
     final authEvent = ref.watch(authProvider).authEvent;
 
     switch (authEvent) {
@@ -36,5 +35,12 @@ class _AuthCheckState extends ConsumerState<AuthCheck> {
       default:
         return const SplashPage();
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: handle(),
+    );
   }
 }
