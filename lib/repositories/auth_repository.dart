@@ -46,12 +46,7 @@ class AuthRepository {
 
   Future<bool> isLoggedIn() async {
     bool isLoggedIn = false;
-
-    // supabase.auth.onAuthStateChange.listen((data) {
-    //   final sp.AuthChangeEvent event = data.event;
-
-    //   isLoggedIn = event == sp.AuthChangeEvent.signedIn;
-    // });
+    
     Future.delayed(Duration.zero, () {
       sp.Session? session = supabase.auth.currentSession;
       if (session != null) {

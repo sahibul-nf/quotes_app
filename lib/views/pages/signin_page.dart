@@ -75,6 +75,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
           margin: const EdgeInsets.only(top: 40),
           padding: const EdgeInsets.only(
             left: 20,

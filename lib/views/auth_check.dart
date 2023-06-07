@@ -19,7 +19,7 @@ class _AuthCheckState extends ConsumerState<AuthCheck> {
     super.initState();
 
     // check if user is logged in or not
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 1), () {
       ref.read(authProvider).checkAuth();
     });
   }
