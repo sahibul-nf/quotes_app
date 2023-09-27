@@ -31,7 +31,7 @@ class _MyProfileState extends ConsumerState<MyProfile> {
         return;
       }
 
-      Navigator.of(context).pop(
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const AuthCheck(),
         ),

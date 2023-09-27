@@ -45,4 +45,13 @@ class QuotesController extends StateNotifier<AsyncValue<List<Quote>?>> {
       state = AsyncValue.data(result);
     }
   }
+
+  // delete a quote
+  Future<void> deleteQuote(Quote quote) async {
+    state = const AsyncValue.loading();
+
+    await quotesRepository.deleteQuote(quote);
+
+    state = const AsyncValue.data(null);
+  }
 }

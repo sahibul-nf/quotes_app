@@ -78,4 +78,14 @@ class QuotesRepository {
       rethrow;
     }
   }
+
+  // delete a quote
+  Future<void> deleteQuote(Quote quote) async {
+    try {
+      await supabase.from('quotes').delete().eq('id', quote.id);
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+  }
 }

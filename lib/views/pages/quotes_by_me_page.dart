@@ -78,6 +78,101 @@ class QuotesByMePage extends ConsumerWidget {
                   final textColor = Color(quotes[index].textColor);
 
                   return InkWell(
+                    onLongPress: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return Container(
+                            height: 200,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 20,
+                              horizontal: 20,
+                            ),
+                            child: Column(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const CreateQuotePage(
+                                                // quote: quotes[index],
+                                                ),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 20,
+                                      horizontal: 20,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          PhosphorIcons.regular.pencil,
+                                          color: MyColors.primaryDark,
+                                          size: 24,
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Text(
+                                          "Edit",
+                                          style: MyTypography.body1.copyWith(
+                                            color: MyColors.primaryDark,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                    ref
+                                        .read(quotesProvider.notifier)
+                                        .deleteQuote(quotes[index])
+                                        .then((_) {
+                                      ref.invalidate(quotesProvider);
+                                    });
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 20,
+                                      horizontal: 20,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          PhosphorIcons.regular.trashSimple,
+                                          color: MyColors.primaryDark,
+                                          size: 24,
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Text(
+                                          "Delete",
+                                          style: MyTypography.body1.copyWith(
+                                            color: MyColors.primaryDark,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
