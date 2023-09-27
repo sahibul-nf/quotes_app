@@ -17,6 +17,24 @@ class UserRepository {
       rethrow;
     }
   }
+
+  // fetch user
+  Future<User> fetchUser(String userId) async {
+    try {
+      final response = await supabase
+          .from('user_details')
+          .select()
+          .eq('user_id', userId)
+          .single();
+
+      final user = User.fromJson(response);
+
+      return user;
+    } catch (e) {
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
 }
 
 final userRepositoryProvider = Provider<UserRepository>((ref) {

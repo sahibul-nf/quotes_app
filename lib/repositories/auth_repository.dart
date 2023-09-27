@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as sp;
@@ -44,19 +42,15 @@ class AuthRepository {
     }
   }
 
-  Future<bool> isLoggedIn() async {
-    bool isLoggedIn = false;
-    
-    Future.delayed(Duration.zero, () {
-      sp.Session? session = supabase.auth.currentSession;
-      if (session != null) {
-        isLoggedIn = true;
-      }
-    });
+  Future<sp.AuthResponse> isLoggedIn(String sessionString) async {
+    try {
+      final response = await supabase.auth.recoverSession(sessionString);
 
-    log('Session: $isLoggedIn');
-
-    return isLoggedIn;
+      return response;
+    } catch (e) {
+      debugPrint(e.toString());
+      rethrow;
+    }
   }
 }
 

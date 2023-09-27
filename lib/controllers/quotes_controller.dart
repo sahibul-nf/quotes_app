@@ -16,7 +16,7 @@ final quotesProvider =
     StateNotifierProvider<QuotesController, AsyncValue<List<Quote>?>>((ref) {
   final repo = ref.watch(quotesRepositoryProvider);
 
-  String userId = ref.watch(userProvider)!.id;
+  String userId = ref.read(userProvider)!.id;
 
   return QuotesController(repo)..getQuotesByMe(userId);
 });

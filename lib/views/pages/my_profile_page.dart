@@ -44,8 +44,6 @@ class _MyProfileState extends ConsumerState<MyProfile> {
     final userState = ref.watch(userProvider);
     final authState = ref.watch(authProvider).authState;
 
-    final username = userState!.name ?? userState.email;
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -85,7 +83,7 @@ class _MyProfileState extends ConsumerState<MyProfile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          username,
+                          userState!.username,
                           style: GoogleFonts.inter(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -95,7 +93,7 @@ class _MyProfileState extends ConsumerState<MyProfile> {
                         ),
                         const SizedBox(height: 5),
                         Text(
-                          userState.profession ?? '...',
+                          userState.profession ?? '',
                           style: GoogleFonts.inter(
                             fontSize: 14,
                             color: MyColors.black,

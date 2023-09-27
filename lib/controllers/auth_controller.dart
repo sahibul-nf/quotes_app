@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quotes_app/controllers/user_controller.dart';
+import 'package:quotes_app/utils/local_storage.dart';
 
 import '../models/user_model.dart';
 import '../repositories/auth_repository.dart';
@@ -87,8 +88,8 @@ class AuthController extends ChangeNotifier {
     try {
       final res = await authRepository.signIn(email, password);
 
-      // final storage = LocalStorage();
-      // await storage.setSession(res.session!);
+      final storage = LocalStorage();
+      await storage.setSession(res.session!);
 
       User authUser = User(id: res.user!.id, email: res.user!.email!);
 
@@ -114,11 +115,13 @@ class AuthController extends ChangeNotifier {
     try {
       await authRepository.signOut();
 
-      // final storage = LocalStorage();
-      // await storage.deleteSession();
+      final storage = LocalStorage();
+      await storage.deleteSession();
 
       setState(AuthState.loaded);
       setAuthEvent(AuthEvent.loggedOut);
+
+      debugPrint(_authEvent.toString());
     } catch (e) {
       final err = ErrorHandling.getErrorMessage(e);
       setErrorMessage(err);
@@ -128,14 +131,32 @@ class AuthController extends ChangeNotifier {
 
   // Check if user is logged in or not
   void checkAuth() async {
-    final isLoggedIn = await authRepository.isLoggedIn();
+    try {
+      final storage = LocalStorage();
+      final session = await storage.getSession();
 
-    if (isLoggedIn) {
+      if (session == null) {
+        signOut();
+        return;
+      }
+
+      debugPrint("UserID: ${session.user.id}");
+      User authUser = await userRepository.fetchUser(session.user.id);
+
+      userController.setUser(authUser);
+
       setAuthEvent(AuthEvent.loggedIn);
-    } else {
-      signOut();
-    }
 
-    debugPrint(_authEvent.toString());
+      // invalidate providers
+      ref.invalidate(getQuotesProvider);
+      ref.invalidate(quotesProvider);
+      ref.invalidate(favoriteProvider);
+
+      debugPrint(_authEvent.toString());
+    } catch (e) {
+      final err = ErrorHandling.getErrorMessage(e);
+      setErrorMessage(err);
+      setState(AuthState.error);
+    }
   }
 }
