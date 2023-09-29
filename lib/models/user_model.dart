@@ -5,7 +5,7 @@ class User {
   final String? avatarUrl;
   final String? profession;
 
-  get username => name ?? email;
+  String get username => name ?? email;
 
   User({
     required this.id,

@@ -71,11 +71,29 @@ class _MyProfileState extends ConsumerState<MyProfile> {
               ),
               child: Row(
                 children: [
-                  const Image(
-                    height: 64,
-                    width: 64,
-                    image: AssetImage('assets/avatar.png'),
-                  ),
+                  if (userState!.avatarUrl == null)
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      height: 60,
+                      width: 60,
+                      child: Center(
+                        child: Text(
+                          userState.username[0],
+                          style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    )
+                  else
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundImage: AssetImage(userState!.avatarUrl!),
+                    ),
                   const SizedBox(width: 16),
                   Expanded(
                     flex: 7,
@@ -228,7 +246,7 @@ class _MyProfileState extends ConsumerState<MyProfile> {
                     const Spacer(),
                     GFToggle(
                       onChanged: (val) {},
-                      value: true,
+                      value: false,
                       type: GFToggleType.ios,
                       boxShape: BoxShape.circle,
                       enabledThumbColor: Colors.white,

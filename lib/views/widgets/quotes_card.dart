@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/components/avatar/gf_avatar.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../themes/colors.dart';
@@ -8,18 +9,18 @@ import '../themes/typography.dart';
 class QuotesCard extends StatelessWidget {
   const QuotesCard({
     super.key,
-    this.color,
     required this.content,
     required this.author,
-    required this.authorAvatar,
-    required this.authorJob,
+    this.authorAvatar,
+    this.authorJob,
     this.textAlign,
+    this.color,
   });
   final Color? color;
   final String content;
   final String author;
-  final String authorAvatar;
-  final String authorJob;
+  final String? authorAvatar;
+  final String? authorJob;
   final TextAlign? textAlign;
 
   @override
@@ -77,10 +78,22 @@ class QuotesCard extends StatelessWidget {
                 const SizedBox(height: 20),
                 Row(
                   children: [
-                    CircleAvatar(
-                      radius: 20,
-                      backgroundImage: AssetImage(authorAvatar),
-                    ),
+                    if (authorAvatar == null)
+                      GFAvatar(
+                        size: 20,
+                        backgroundColor: Colors.black.withOpacity(0.1),
+                        child: Text(
+                          author[0],
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
+                    else
+                      CircleAvatar(
+                        radius: 20,
+                        backgroundImage: AssetImage(authorAvatar!),
+                      ),
                     const SizedBox(width: 16),
                     Expanded(
                       child: Column(
@@ -93,14 +106,15 @@ class QuotesCard extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          const SizedBox(height: 5),
-                          Text(
-                            authorJob,
-                            style: MyTypography.caption1.copyWith(
-                              color: Colors.white70,
+                          if (authorJob != null) const SizedBox(height: 5),
+                          if (authorJob != null)
+                            Text(
+                              authorJob!,
+                              style: MyTypography.caption1.copyWith(
+                                color: Colors.white70,
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
                         ],
                       ),
                     )

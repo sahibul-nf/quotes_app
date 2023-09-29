@@ -95,8 +95,6 @@ class QuotesPage extends ConsumerWidget {
                         child: QuotesCard(
                           color: cardColor,
                           author: quotes[index].author!,
-                          authorAvatar: "assets/img_avatar.png",
-                          authorJob: "Co-Founder of The Walt Disney Company",
                           content: quotes[index].content!,
                           // "The best way to get started is to quit talking and begin doing.",
                         ),

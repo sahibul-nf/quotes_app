@@ -6,6 +6,7 @@ class Quote {
   final String content;
   final String author;
   final String? profession;
+  final String? avatar;
   final int backgroundColor;
   final int textColor;
   final double? fontSize;
@@ -19,6 +20,7 @@ class Quote {
     required this.content,
     required this.author,
     this.profession,
+    this.avatar,
     required this.backgroundColor,
     required this.textColor,
     required this.fontWeight,

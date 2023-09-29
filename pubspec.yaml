@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  appinio_social_share: ^0.2.6
   auto_size_text: ^3.0.0
   cupertino_icons: ^1.0.2
   dot_navigation_bar: ^1.0.1+4

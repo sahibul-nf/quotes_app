@@ -15,8 +15,8 @@ class MyColors {
     0xff8294C4,
     0xffAAC8A7,
     0xffE76161,
-    0xff5C469C,
-    0xffFFD95A,
+    0xff5C4B99,
+    0xffFFCC70,
     0xffF1B9C85,
     0xff47B5FF,
   ];

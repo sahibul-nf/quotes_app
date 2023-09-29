@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.4.2"
+  appinio_social_share:
+    dependency: "direct main"
+    description:
+      name: appinio_social_share
+      sha256: a005d1a83f76766ec06de1a89b66cb84d4ca8024f7306b1557ae0fea28992f0b
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.6"
   async:
     dependency: transitive
     description:

@@ -1,6 +1,8 @@
+import 'package:appinio_social_share/appinio_social_share.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
@@ -11,7 +13,7 @@ import '../themes/typography.dart';
 import '../widgets/icon_solid_light.dart';
 
 class QuoteDetailPage extends ConsumerWidget {
-  const QuoteDetailPage({
+  QuoteDetailPage({
     super.key,
     required this.quote,
   });
@@ -28,6 +30,15 @@ class QuoteDetailPage extends ConsumerWidget {
       ref.refresh(favoriteProvider);
     });
   }
+
+  void shareQuote() {
+    appinioSocialShare.shareToSystem(
+      quote.content,
+      quote.author,
+    );
+  }
+
+  AppinioSocialShare appinioSocialShare = AppinioSocialShare();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -92,10 +103,22 @@ class QuoteDetailPage extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const CircleAvatar(
-                  radius: 20,
-                  backgroundImage: AssetImage('assets/avatar.png'),
-                ),
+                if (quote.avatar == null)
+                  GFAvatar(
+                    size: 20,
+                    backgroundColor: Colors.black.withOpacity(0.1),
+                    child: Text(
+                      quote.author[0],
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  )
+                else
+                  CircleAvatar(
+                    radius: 20,
+                    backgroundImage: AssetImage(quote.avatar!),
+                  ),
                 const SizedBox(width: 16),
                 Flexible(
                   child: Column(
@@ -155,7 +178,7 @@ class QuoteDetailPage extends ConsumerWidget {
                 if (quote.id != null) const SizedBox(width: 16),
                 // share button with icon
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () => shareQuote(),
                   icon: Icon(PhosphorIcons.fill.shareFat),
                   label: const Text("Share"),
                   style: ElevatedButton.styleFrom(
