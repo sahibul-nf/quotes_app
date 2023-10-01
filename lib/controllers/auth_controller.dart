@@ -157,6 +157,8 @@ class AuthController extends ChangeNotifier {
       final err = ErrorHandling.getErrorMessage(e);
       setErrorMessage(err);
       setState(AuthState.error);
+
+      signOut();
     }
   }
 }

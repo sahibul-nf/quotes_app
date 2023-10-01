@@ -1,12 +1,14 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 
 class QuotWidgetPreview extends StatelessWidget {
-  const QuotWidgetPreview(
-      {super.key, required this.memoryImage, required this.menuWidget});
-  final Uint8List memoryImage;
+  const QuotWidgetPreview({
+    super.key,
+    required this.menuWidget,
+    required this.imagePreview,
+  });
+
   final Widget menuWidget;
+  final Widget imagePreview;
 
   @override
   Widget build(BuildContext context) {
@@ -18,26 +20,13 @@ class QuotWidgetPreview extends StatelessWidget {
         children: [
           const SizedBox(height: 40),
           // image preview
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(
-                    image: MemoryImage(memoryImage),
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          imagePreview,
           // share menu
-          const SizedBox(height: 40),
+          const SizedBox(height: 20),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             physics: BouncingScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: menuWidget,
           )
         ],

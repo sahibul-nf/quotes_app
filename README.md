@@ -7,9 +7,11 @@ Hi, I'm Sahibul, I'm a Flutter Developer 🚀 from Indonesia.
 
 Quotes App is a mobile application that can help you to find the best quotes from the best people in the world. This app is built with Flutter, Supabase and Riverpod State Management. This app is still under development, so there are many features that are not yet available. I will continue to develop this application to be better in the future. If you want to contribute to this application, you can fork this repository and make a pull request. I will be very happy to accept your contribution. Thank you very much for your contribution.
 
+
 ## Demo
 
-[![Quotes App](https://cdn.loom.com/sessions/thumbnails/a2b64f2c1b6e4674b763ac57e8d3b208-with-play.gif)](https://www.loom.com/share/a2b64f2c1b6e4674b763ac57e8d3b208)
+[![Quotes App](https://cdn.loom.com/sessions/thumbnails/d117279d89c744a294c00c758403f38e-1696188840539-with-play.gif)](https://www.loom.com/share/d117279d89c744a294c00c758403f38e)
+
 
 ## Screenshots
 
@@ -23,7 +25,7 @@ Quotes App is a mobile application that can help you to find the best quotes fro
 - [x]   Favorite Quotes
 - [x]   Add Quotes
 - [x]   Authentication
-- [x]   Dark Mode
+- [x]   Share Quotes to Social Media
 - [x]   Beautiful UI Theme
 
 

@@ -30,6 +30,7 @@ environment:
 dependencies:
   appinio_social_share: ^0.2.6
   auto_size_text: ^3.0.0
+  carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
   dot_navigation_bar: ^1.0.1+4
   dotted_decoration: ^2.0.0
