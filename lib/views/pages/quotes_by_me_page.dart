@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:quotes_app/controllers/favorite_controller.dart';
 import 'package:quotes_app/views/widgets/empty_state.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 
 import '../../controllers/quotes_controller.dart';
+import '../../models/quote_model.dart';
 import '../themes/colors.dart';
 import '../themes/typography.dart';
 import '../widgets/icon_solid_light.dart';
@@ -52,6 +54,7 @@ class QuotesByMePage extends ConsumerWidget {
           return Future.value();
         },
         child: quotesState.when(
+          skipLoadingOnRefresh: true,
           data: (quotes) {
             if (quotes == null || quotes.isEmpty) {
               return const EmptyState(
@@ -78,101 +81,11 @@ class QuotesByMePage extends ConsumerWidget {
                   final textColor = Color(quotes[index].textColor);
 
                   return InkWell(
-                    onLongPress: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (context) {
-                          return Container(
-                            height: 200,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 20,
-                              horizontal: 20,
-                            ),
-                            child: Column(
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.of(context).pop();
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const CreateQuotePage(
-                                                // quote: quotes[index],
-                                                ),
-                                      ),
-                                    );
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 20,
-                                      horizontal: 20,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          PhosphorIcons.regular.pencil,
-                                          color: MyColors.primaryDark,
-                                          size: 24,
-                                        ),
-                                        const SizedBox(width: 10),
-                                        Text(
-                                          "Edit",
-                                          style: MyTypography.body1.copyWith(
-                                            color: MyColors.primaryDark,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 20),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.of(context).pop();
-                                    ref
-                                        .read(quotesProvider.notifier)
-                                        .deleteQuote(quotes[index])
-                                        .then((_) {
-                                      ref.invalidate(quotesProvider);
-                                    });
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 20,
-                                      horizontal: 20,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          PhosphorIcons.regular.trashSimple,
-                                          color: MyColors.primaryDark,
-                                          size: 24,
-                                        ),
-                                        const SizedBox(width: 10),
-                                        Text(
-                                          "Delete",
-                                          style: MyTypography.body1.copyWith(
-                                            color: MyColors.primaryDark,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      );
-                    },
+                    onLongPress: () => onLongPressCard(
+                      context,
+                      quotes[index],
+                      ref,
+                    ),
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
@@ -217,6 +130,7 @@ class QuotesByMePage extends ConsumerWidget {
                           Text(
                             quotes[index].author,
                             textAlign: TextAlign.center,
+                            maxLines: 1,
                             style: MyTypography.body2.copyWith(
                               color: textColor,
                               fontSize: 12,
@@ -251,6 +165,115 @@ class QuotesByMePage extends ConsumerWidget {
           },
         ),
       ),
+    );
+  }
+
+  void onLongPressCard(BuildContext context, Quote quote, ref) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          // height: 200,
+          padding: const EdgeInsets.symmetric(
+            vertical: 20,
+            horizontal: 20,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).pop();
+                  // TODO: implement edit quote
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const CreateQuotePage(
+                  //         // quote: quotes[index],
+                  //         ),
+                  //   ),
+                  // );
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 20,
+                    horizontal: 20,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        PhosphorIcons.regular.pencil,
+                        color: MyColors.primaryDark,
+                        size: 24,
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        "Edit",
+                        style: MyTypography.body1.copyWith(
+                          color: MyColors.primaryDark,
+                        ),
+                      ),
+                      // this feat is coming soon
+                      const Spacer(),
+                      Chip(
+                        backgroundColor: MyColors.secondary,
+                        label: Text(
+                          "Coming soon",
+                          style: MyTypography.caption1.copyWith(
+                            color: MyColors.primaryDark,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).pop();
+                  ref
+                      .read(quotesProvider.notifier)
+                      .deleteQuote(quote)
+                      .then((_) {
+                    ref.invalidate(quotesProvider);
+                    ref.invalidate(favoriteProvider);
+                  });
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 20,
+                    horizontal: 20,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        PhosphorIcons.regular.trashSimple,
+                        color: MyColors.primaryDark,
+                        size: 24,
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        "Delete",
+                        style: MyTypography.body1.copyWith(
+                          color: MyColors.primaryDark,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

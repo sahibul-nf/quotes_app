@@ -20,9 +20,8 @@ class SignInPage extends ConsumerStatefulWidget {
 }
 
 class _SignInPageState extends ConsumerState<SignInPage> {
-  final _emailController =
-      TextEditingController(text: 'sahibulnuzulfirdaus13@gmail.com');
-  final _passwordController = TextEditingController(text: 'sahibul');
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   Future<void> onTapSignIn() async {
     final email = _emailController.text.trim();
@@ -54,6 +53,15 @@ class _SignInPageState extends ConsumerState<SignInPage> {
   }
 
   @override
+  void initState() {
+    // Test Account
+    // _emailController.text = "sahibulnuzulfirdaus13@gmail.com";
+    // _passwordController.text = "sahibul";
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider).authState;
 
@@ -74,8 +82,6 @@ class _SignInPageState extends ConsumerState<SignInPage> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
           margin: const EdgeInsets.only(top: 40),
           padding: const EdgeInsets.only(
             left: 20,
@@ -144,6 +150,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                   const SizedBox(height: 10),
                   TextField(
                     controller: _passwordController,
+                    obscureText: true,
                     decoration: InputDecoration(
                       hintText: "Enter your password",
                       hintStyle: MyTypography.body1.copyWith(

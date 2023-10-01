@@ -76,8 +76,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          // width: MediaQuery.of(context).size.width,
+          // height: MediaQuery.of(context).size.height,
           margin: const EdgeInsets.only(top: 40),
           padding: const EdgeInsets.only(
             left: 20,
@@ -146,6 +146,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                   const SizedBox(height: 10),
                   TextField(
                     controller: _passwordController,
+                    obscureText: true,
                     decoration: InputDecoration(
                       hintText: "Enter your password",
                       hintStyle: MyTypography.body1.copyWith(

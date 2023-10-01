@@ -74,24 +74,22 @@ class _MyProfileState extends ConsumerState<MyProfile> {
                   if (userState!.avatarUrl == null)
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(50),
+                        color: MyColors.primary.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(25),
                       ),
                       height: 60,
                       width: 60,
                       child: Center(
-                        child: Text(
-                          userState.username[0],
-                          style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.black,
-                          ),
+                        child: Icon(
+                          Icons.person,
+                          size: 30,
+                          color: MyColors.primaryDark,
                         ),
                       ),
                     )
                   else
                     CircleAvatar(
-                      radius: 20,
+                      radius: 25,
                       backgroundImage: AssetImage(userState!.avatarUrl!),
                     ),
                   const SizedBox(width: 16),
@@ -158,11 +156,15 @@ class _MyProfileState extends ConsumerState<MyProfile> {
                             color: MyColors.primary,
                           ),
                           const SizedBox(width: 6),
-                          Text(
-                            'Delete Account',
-                            style: GoogleFonts.inter(
-                              fontSize: 14,
-                              color: const Color(0xFFE05858),
+                          Flexible(
+                            child: Text(
+                              'Delete Account',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.inter(
+                                fontSize: 14,
+                                color: const Color(0xFFE05858),
+                              ),
                             ),
                           ),
                         ],

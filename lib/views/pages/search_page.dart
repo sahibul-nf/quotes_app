@@ -91,6 +91,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
           ),
         ),
       ),
+      resizeToAvoidBottomInset: false,
       body: searchQuotesState.when(
         data: (quotes) {
           if (quotes == null) {
@@ -201,7 +202,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                     userId: '',
                     profession: '',
                   );
-                  
+
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => QuoteDetailPage(

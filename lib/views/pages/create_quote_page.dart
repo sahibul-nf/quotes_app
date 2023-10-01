@@ -46,12 +46,23 @@ class _CreateQuotePageState extends ConsumerState<CreateQuotePage> {
   void createQuote() {
     String userId = ref.watch(userProvider)!.id;
 
+    String author = authorController.text;
+    String profession = professionController.text;
+
+    if (author.isEmpty) {
+      author = ref.watch(userProvider)?.username ?? "";
+    }
+
+    if (profession.isEmpty) {
+      profession = ref.watch(userProvider)?.profession ?? "";
+    }
+
     // create quote object
     final quote = Quote(
       userId: userId,
       content: contentController.text,
-      author: authorController.text,
-      profession: professionController.text,
+      author: author,
+      profession: profession,
       backgroundColor: backgroundColor.value,
       textColor: textColor.value,
       fontSize: fontSize,

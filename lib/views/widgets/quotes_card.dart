@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:getwidget/components/avatar/gf_avatar.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../themes/colors.dart';
@@ -79,13 +78,19 @@ class QuotesCard extends StatelessWidget {
                 Row(
                   children: [
                     if (authorAvatar == null)
-                      GFAvatar(
-                        size: 20,
-                        backgroundColor: Colors.black.withOpacity(0.1),
-                        child: Text(
-                          author[0],
-                          style: const TextStyle(
-                            color: Colors.white,
+                      Container(
+                        decoration: BoxDecoration(
+                          color: MyColors.black.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        height: 30,
+                        width: 30,
+                        child: Center(
+                          child: Text(
+                            author[0],
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       )
