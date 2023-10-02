@@ -90,7 +90,7 @@ class _MyProfileState extends ConsumerState<MyProfile> {
                   else
                     CircleAvatar(
                       radius: 25,
-                      backgroundImage: AssetImage(userState!.avatarUrl!),
+                      backgroundImage: AssetImage(userState?.avatarUrl! ?? ''),
                     ),
                   const SizedBox(width: 16),
                   Expanded(
@@ -99,7 +99,7 @@ class _MyProfileState extends ConsumerState<MyProfile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          userState!.username,
+                          userState?.username ?? '',
                           style: GoogleFonts.inter(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

@@ -29,7 +29,7 @@ class _MenuState extends State<Menu> {
     return Scaffold(
       body: IndexedStack(
         index: _SelectedTab.values.indexOf(_selectedTab),
-        children: [
+        children: const [
           QuotesPage(),
           QuotesByMePage(),
           FavoritePage(),

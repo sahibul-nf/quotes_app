@@ -60,7 +60,7 @@ class _QuoteDetailPageState extends ConsumerState<QuoteDetailPage> {
   }
 
   void onTapFavorite(bool isFavorite, WidgetRef ref) {
-    print(isFavorite);
+    debugPrint(isFavorite.toString());
 
     ref
         .read(favoriteProvider.notifier)
@@ -217,13 +217,13 @@ class _QuoteDetailPageState extends ConsumerState<QuoteDetailPage> {
   GlobalKey iconButtonKey = GlobalKey();
 
   Future<Map<String, Uint8List>?> takeScreenshotQuotWidget() async {
-    print("Take screenshot quot widget");
+    debugPrint("Take screenshot quot widget");
 
     // Get size of body widget
     final keyContext = quotCardKey.currentContext;
     final iconButtonContext = iconButtonKey.currentContext;
     if (keyContext == null && iconButtonContext == null) {
-      print("Widget not found");
+      debugPrint("Widget not found");
       return null;
     }
 
@@ -249,9 +249,9 @@ class _QuoteDetailPageState extends ConsumerState<QuoteDetailPage> {
     final memoryImageWithBgPattern =
         await screenshotController.captureFromWidget(cardWidgetWithBgPattern);
 
-    print(
+    debugPrint(
         "Memory image: ${(memoryImage.buffer.lengthInBytes / 1024).toPrecision(2)} KB");
-    print(
+    debugPrint(
         "Memory image with bg pattern: ${(memoryImageWithBgPattern.buffer.lengthInBytes / 1024).toPrecision(2)} KB");
 
     return {
@@ -282,7 +282,7 @@ class _QuoteDetailPageState extends ConsumerState<QuoteDetailPage> {
         future: takeScreenshotQuotWidget(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Container(
+            return SizedBox(
               height: MediaQuery.of(context).size.height * 0.9,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -540,7 +540,7 @@ class _QuoteDetailPageState extends ConsumerState<QuoteDetailPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             InkWell(
               onTap: () {
                 pageIndexNotifier.value = 1;

@@ -50,8 +50,7 @@ class QuotesByMePage extends ConsumerWidget {
       ),
       body: RefreshIndicator(
         onRefresh: () {
-          ref.refresh(quotesProvider);
-          return Future.value();
+          return Future.value(ref.refresh(quotesProvider));
         },
         child: quotesState.when(
           skipLoadingOnRefresh: true,
